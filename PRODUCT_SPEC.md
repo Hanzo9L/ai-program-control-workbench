@@ -33,7 +33,7 @@ Secondary viewers: named initiative owners and a leadership audience who need a 
 2. Human submits the draft for **Intake Review**.
 3. Human confirms or corrects AI-suggested classification and completeness.
 4. Initiative moves to **PHI / PII Risk Pre-Check** and program-control review.
-5. Humans record gate status. Unmet required gates set **Readiness: Blocked** and prevent progression. They do not change lifecycle state.
+5. Humans record gate status. Gate status and readiness are stage-aware. During `Draft` and `Intake Review`, gates may remain `Open` without making readiness `Blocked`. Beginning at `Risk Review`, any applicable required gate with status `Open` makes readiness `Blocked`. `Satisfied` and `Not Applicable` do not block progression. Resolving open gates changes readiness only; it does not change lifecycle state.
 6. When required reviews are recorded, a human may advance the initiative to **Ready for Approval**. Clearing blockers does not advance the lifecycle by itself.
 7. An accountable human approves launch, or returns the work.
 8. Approved work may enter **In Pilot**, then **Complete**.
@@ -59,7 +59,7 @@ No step after Draft advances without a recorded human action in the initial prod
 - **User action:** Save Draft; submit for Intake Review.
 - **AI-assisted behavior:** Summarize the intake; flag missing required fields; suggest a preliminary data-sensitivity label and likely applicable gates. Suggestions are labeled as suggestions.
 - **Human decision/approval:** Submit for review; accept, edit, or reject suggested classification before it becomes the recorded working classification.
-- **Must not happen automatically:** Submit, classification finalization, or skip of missing required fields.
+- **Must not happen automatically:** Submit, classification finalization, or skip of missing required fields. Missing or incomplete intake information may prevent submission; that is an intake validation condition, not readiness `Blocked`.
 
 ## 5.3 PHI / PII Risk Pre-Check
 
@@ -104,16 +104,18 @@ Seven lifecycle states. Blocking is not a lifecycle state.
 
 Happy path: `Draft` → `Intake Review` → `Risk Review` → `Ready for Approval` → `Approved for Launch` → `In Pilot` → `Complete`.
 
-**Readiness** is independent of lifecycle state:
+**Readiness** is independent of lifecycle state. Gate status and readiness are stage-aware. There is no separate informational-gate category in the initial product.
 
 | Readiness | Meaning |
 | --- | --- |
-| `Blocked` | One or more required program controls/dependencies prevent progression. |
-| `Clear` | Required controls/dependencies do not currently prevent progression. |
+| `Blocked` | Beginning at `Risk Review`, one or more applicable required program controls/dependencies are `Open` and prevent progression. |
+| `Clear` | Required controls/dependencies do not currently prevent progression. During `Draft` and `Intake Review`, `Open` gates do not make readiness `Blocked`. Beginning at `Risk Review`, readiness is `Clear` only when no applicable required gate remains `Open`. |
+
+`Satisfied` and `Not Applicable` do not block progression.
 
 Example: Lifecycle State: `Risk Review`. Readiness: `Blocked`.
 
-Resolving a blocking condition sets readiness to `Clear` and must **not** change lifecycle state. A human must explicitly advance the initiative afterward.
+Resolving open gates changes readiness only; it does not advance lifecycle state. A human must explicitly advance the initiative afterward.
 
 Allowed returns: any in-progress lifecycle state back to an earlier review state by human action. `Complete` does not auto-reopen.
 
@@ -145,10 +147,14 @@ Required gate keys for the initial product:
 
 Rules:
 
+- Gate status and readiness are stage-aware. There is no separate informational-gate category in the initial product.
+- During `Draft` and `Intake Review`, gates may remain `Open` without making readiness `Blocked`. Missing or incomplete intake information may prevent submission or progression; that is an intake validation condition, not readiness `Blocked`.
+- Beginning at `Risk Review`, any applicable required gate with status `Open` makes readiness `Blocked`.
+- Beginning at `Risk Review`, readiness is `Clear` only when no applicable required gate remains `Open`.
+- `Satisfied` and `Not Applicable` do not block progression.
 - `human_accountability` must be `Satisfied` before a human may advance to `Ready for Approval`.
-- An initiative has readiness `Blocked` when one or more required program controls/dependencies are `Open` and prevent progression.
 - Required `Open` gates prevent a human from advancing from `Risk Review` to `Ready for Approval`. Lifecycle state does not change on a refused advance.
-- When those gates become `Satisfied` or `Not Applicable`, readiness becomes `Clear`. Lifecycle state stays where it is until a human explicitly advances it.
+- Resolving open gates changes readiness only; it does not advance lifecycle state. A human must explicitly advance afterward.
 - Satisfying a gate or marking it `Not Applicable` records a human actor and timestamp. AI cannot set `Satisfied` or `Not Applicable`.
 
 # 8. AI Assistance Boundaries
@@ -203,7 +209,7 @@ Consequential approvals and compliance language remain out of scope for automati
 
 Fictional only. They do not represent a real health system, real patients, or a real implementation.
 
-1. **Internal policy assistant** — Lifecycle: `Draft`. Readiness: `Clear`. Q&A over published internal policy PDFs. No PHI/PII described. Owner not yet named. Exercises incomplete intake (submit blocked by missing required fields, which is not the same as readiness `Blocked`).
+1. **Internal policy assistant** — Lifecycle: `Draft`. Readiness: `Clear`. Q&A over published internal policy PDFs. No PHI/PII described. Owner not yet named. Gates may remain `Open`. Exercises incomplete intake: missing required fields prevent submission (intake validation), which is not readiness `Blocked`.
 2. **Scheduling assistant** — Lifecycle: `Ready for Approval`. Readiness: `Clear`. Helps staff propose meeting times from calendar metadata. Sensitivity recorded as non-PHI. Gates `Satisfied` or `Not Applicable`. Exercises a clean approval queue.
 3. **Clinical-note summarization pilot** — Lifecycle: `Risk Review`. Readiness: `Blocked`. Summarizes synthetic clinical notes for a named clinician owner. `data_sensitivity_review` Open; `storage_tool_approval` Open. Exercises high-sensitivity review without a compliance claim.
 4. **Claims-document triage pilot** — Lifecycle: `In Pilot`. Readiness: `Clear`. Routes synthetic claims documents to work queues. Vendor recorded; `baa_vendor_review` Satisfied by a named human. Exercises post-approval pilot state.
@@ -244,8 +250,8 @@ The MVP is complete when all of the following are demonstrable with synthetic da
 2. Five screens exist and show the same initiative record consistently, including lifecycle state and independent readiness.
 3. All seven lifecycle states can be represented; readiness `Blocked` and `Clear` can be represented independently; at least the five synthetic examples are visible.
 4. Gate statuses `Open`, `Satisfied`, and `Not Applicable` can be recorded by a human; AI cannot mark gates `Satisfied` or `Not Applicable`. There is no `Waived` status.
-5. An initiative with required `Open` gates has readiness `Blocked` and cannot be advanced to `Ready for Approval`. Refused advance does not change lifecycle state.
-6. Resolving blocking conditions sets readiness to `Clear` and does not change lifecycle state. A human must explicitly advance afterward.
+5. Beginning at `Risk Review`, an initiative with any applicable required gate `Open` has readiness `Blocked` and cannot be advanced to `Ready for Approval`. During `Draft` and `Intake Review`, `Open` gates do not make readiness `Blocked`. Refused advance does not change lifecycle state.
+6. Resolving open gates changes readiness only; it does not advance lifecycle state. A human must explicitly advance afterward.
 7. `Approved for Launch` occurs only via an explicit human action.
 8. Leadership Brief shows counts by lifecycle state, blocked items (with current lifecycle state), unresolved dependencies, owner/action, and a summary drawn only from recorded data.
 9. UI copy does not claim HIPAA/legal/regulatory/privacy/security compliance.

@@ -62,17 +62,20 @@ The work should demonstrate competency, judgment, structure, and attention to de
 - Consequential progression remains explicit human action.
 - Future automation candidates are limited to reducing clerical friction and remain subject to defined criteria, testing, policy, reliability requirements, and owner approval.
 - Initial product uses synthetic data only.
+- Typed domain model and synthetic fixtures live in `src/lib/domain/types.ts`, `constants.ts`, `fixtures.ts`, and `validation.ts`.
+- Stage-aware readiness: during `Draft` / `Intake Review`, `Open` gates do not by themselves make readiness `Blocked`. From `Risk Review` onward, any required `Open` gate makes readiness `Blocked`.
 - No further architecture decisions have been authorized.
 
 # Current Authorized Step
 
-Checkpointing Step 2 — product behavior specification validated.
+Checkpointing Step 3 — typed domain model and synthetic fixtures validated.
 
 # Completed and Validated Steps
 
 - **Step 0 — Establish repository governance and project-state documentation.** Completed, validated, committed, and pushed.
 - **Step 1 — Scaffold and validate the application baseline.** Completed, validated, committed, and pushed.
 - **Step 2 — Define the product shape and workflow/state model.** Completed and validated. Pending commit.
+- **Step 3 — Define typed domain model and synthetic fixture data.** Completed and validated. Pending commit.
 
 # Validation Evidence
 
@@ -131,6 +134,20 @@ Step 2 independently reviewed and validated by the project architect. Confirmed:
 - Future automation candidates are limited to reducing clerical friction and remain subject to defined criteria, testing, policy, reliability requirements, and owner approval.
 - Initial product uses synthetic data only.
 
+Step 3 independently validated. Confirmed:
+
+- Created: `src/lib/domain/types.ts`, `src/lib/domain/constants.ts`, `src/lib/domain/fixtures.ts`, `src/lib/domain/validation.ts`.
+- Domain model implements the validated seven lifecycle states, independent `Blocked` | `Clear` readiness, and `Open` | `Satisfied` | `Not Applicable` gate status.
+- Stage-aware readiness: `Draft` / `Intake Review`: `Open` gates do not by themselves make readiness `Blocked`. `Risk Review` onward: any required `Open` gate makes readiness `Blocked`.
+- Five synthetic initiatives created exactly as defined in `PRODUCT_SPEC.md`.
+- `npm run check` passed with 0 errors and 0 warnings.
+- `npm run build` passed successfully.
+- Runtime fixture validation passed: `PASS: all 5 synthetic initiatives validated`.
+- Negative validation tests passed: Draft + Open gates may remain Clear; Risk Review + Open gates + Clear rejected; Ready for Approval + no Open gates + Blocked rejected; duplicate required gate rejected; forbidden `Waived` status rejected.
+- Temporary validation runners were deleted after execution.
+- No dependencies were added.
+- No routes/components, auth, persistence, API code, state-management libraries, or workflow engine were introduced.
+
 # Known-Good Checkpoints
 
 - **Checkpoint 0:** Step 0 repository governance and project-state documentation. Completed, validated, committed, and pushed.
@@ -142,6 +159,7 @@ Step 2 independently reviewed and validated by the project architect. Confirmed:
   - Message: `Establish validated SvelteKit baseline`
   - Remote branch: `origin/main`
 - **Checkpoint 2 (pending commit):** Validated product behavior specification. Pending authorized commit.
+- **Checkpoint 3 (pending commit):** Validated typed domain model and synthetic fixture dataset. Pending authorized commit.
 
 # Blockers
 
