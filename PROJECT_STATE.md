@@ -69,11 +69,12 @@ The work should demonstrate competency, judgment, structure, and attention to de
 - `/initiatives/{id}/risk-precheck` is a read-only PHI / PII Risk Pre-Check. It loads the matching fixture record, separates recorded human classification from AI suggestions/indicators, and does not generate missing suggestions.
 - `/leadership-brief` is a read-only Leadership Brief derived from `SYNTHETIC_INITIATIVES`. Existing `leadership_draft` suggestions are shown separately and are not the recorded brief.
 - `/initiatives/{id}/intake` is a read-only AI Workflow Intake. It loads the matching fixture record, evaluates deterministic intake completeness separately from readiness, and displays existing AI suggestions separately from recorded human data.
+- The root route includes a Demo Orientation & Data Guide above the existing fixture-driven Portfolio Dashboard.
 - No further architecture decisions have been authorized.
 
 # Current Authorized Step
 
-PAUSED — Checkpoint 8 is the last known-good state. Five-screen read-only MVP validated.
+Checkpointing Step 9 — Demo Orientation & Data Guide validated.
 
 # Completed and Validated Steps
 
@@ -86,6 +87,7 @@ PAUSED — Checkpoint 8 is the last known-good state. Five-screen read-only MVP 
 - **Step 6 — Read-only PHI / PII Risk Pre-Check.** Completed, validated, committed, and pushed.
 - **Step 7 — Read-only Leadership Brief.** Completed, validated, committed, and pushed.
 - **Step 8 — Read-only AI Workflow Intake.** Completed, validated, committed, and pushed.
+- **Step 9 — Demo Orientation & Data Guide.** Completed and validated. Pending commit.
 
 # Validation Evidence
 
@@ -241,6 +243,22 @@ Step 8 independently validated. Confirmed:
 - `npm run build` passed successfully.
 - No dependencies, domain behavior, persistence, auth, workflow mutations, API calls, or state-management libraries were introduced.
 
+Step 9 independently validated. Confirmed:
+
+- Root page now includes a Demo Orientation & Data Guide above the existing Portfolio Dashboard.
+- Orientation explains: what the proof-of-work is; synthetic-data and non-representation boundaries; Lifecycle; Readiness; stage-aware Blocked behavior; the seven Program Controls; Open, Satisfied, and Not Applicable; AI assistance vs human authority; where to explore the five validated application surfaces.
+- Explicitly states that Blocked does not mean unsafe, noncompliant, failed, or rejected.
+- Existing AI content is described as fixture-based and read-only.
+- Includes the principle: AI can suggest. Deterministic rules can enforce defined checks. Humans remain accountable for decisions.
+- Suggested starting point is the synthetic Clinical-note summarization pilot.
+- Development transparency states that the application uses SvelteKit, TypeScript, Node.js, synthetic data, and AI-assisted coding under stepwise validation, human review, and version control.
+- Existing Portfolio Dashboard remains fixture-driven from `SYNTHETIC_INITIATIVES`.
+- Dashboard counts remain: Total 5; Blocked 2; Ready for Approval 1; In Pilot 1.
+- Runtime validation confirmed orientation, controls, explore links, and dashboard counts render.
+- `npm run check` passed with 0 errors and 0 warnings.
+- `npm run build` passed successfully.
+- No dependencies, domain behavior, persistence, auth, workflow mutations, APIs, or state-management libraries were introduced.
+
 # Known-Good Checkpoints
 
 - **Checkpoint 0:** Step 0 repository governance and project-state documentation. Completed, validated, committed, and pushed.
@@ -279,6 +297,7 @@ Step 8 independently validated. Confirmed:
   - Commit: `836a90b`
   - Message: `Add validated read-only AI workflow intake`
   - Remote branch: `origin/main`
+- **Checkpoint 9 (pending commit):** Validated Demo Orientation & Data Guide. Pending authorized commit.
 
 # Last Known-Good Checkpoint
 
@@ -329,7 +348,7 @@ None recorded.
 
 # Next Authorized Step
 
-Not yet authorized. Recommended next phase: demo/deployment hardening before workflow mutations.
+Not yet authorized. Recommended next action: deploy Checkpoint 9 and validate the public Vercel routes.
 
 # Resume From Here
 

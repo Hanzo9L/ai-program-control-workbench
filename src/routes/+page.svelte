@@ -33,85 +33,301 @@
 	<p class="nav">
 		<a href="/leadership-brief">Leadership Brief</a>
 	</p>
-	<header class="header">
-		<h1>AI Program Control & Risk Workbench</h1>
-		<p class="subtitle">
-			Lightweight proof-of-work for structuring AI initiatives, showing dependencies, and recording
-			readiness. Humans retain authority over consequential decisions.
+
+	<section class="orientation" aria-label="Demo orientation and data guide">
+		<header class="header">
+			<p class="eyebrow">Demo orientation &amp; data guide</p>
+			<h1>AI Program Control &amp; Risk Workbench</h1>
+			<p class="subtitle">
+				A lightweight proof-of-work. It shows how emerging AI initiatives can be structured,
+				reviewed, and communicated while consequential decisions remain with accountable humans.
+			</p>
+		</header>
+
+		<section class="panel" aria-label="Introduction">
+			<h2>What this is</h2>
+			<p>
+				This application is a lightweight proof-of-work. It demonstrates how emerging AI
+				initiatives can be structured, reviewed, and communicated. Consequential decisions remain
+				with accountable humans.
+			</p>
+			<p>
+				All application data is synthetic. It does not represent any healthcare organization’s
+				systems, policies, architecture, workflows, or compliance requirements. It does not
+				determine legal, regulatory, HIPAA, privacy, or security compliance.
+			</p>
+		</section>
+
+		<section class="panel" aria-label="How to read the data">
+			<h2>How to read the data</h2>
+			<p>
+				<strong>Lifecycle</strong> is where an initiative currently sits in the program process.
+			</p>
+			<p class="lifecycle-path" data-lifecycle-path>
+				Draft → Intake Review → Risk Review → Ready for Approval → Approved for Launch → In Pilot →
+				Complete
+			</p>
+			<p>
+				<strong>Readiness</strong> is separate from lifecycle.
+			</p>
+			<dl class="readiness-defs">
+				<div>
+					<dt>Clear</dt>
+					<dd>
+						Nothing at the initiative’s current lifecycle stage is presently preventing progression
+						under the demonstrated program-control model.
+					</dd>
+				</div>
+				<div>
+					<dt>Blocked</dt>
+					<dd>
+						At Risk Review or later, one or more required program controls remain Open. Blocked
+						does not mean unsafe, noncompliant, failed, or rejected.
+					</dd>
+				</div>
+			</dl>
+			<p>
+				During Draft and Intake Review, Open controls do not by themselves make readiness Blocked.
+				Intake completeness is evaluated separately.
+			</p>
+		</section>
+
+		<section class="panel" aria-label="Program controls">
+			<h2>Program Controls</h2>
+			<p>
+				These are program-control statuses, not compliance certifications. There is no Waived
+				status.
+			</p>
+			<dl class="control-list">
+				<div>
+					<dt>Security readiness</dt>
+					<dd>Whether the security review/dependency has been addressed.</dd>
+				</div>
+				<div>
+					<dt>Storage / tool approval</dt>
+					<dd>Whether the proposed storage/tooling path has been resolved.</dd>
+				</div>
+				<div>
+					<dt>Data sensitivity review</dt>
+					<dd>Whether the working data-sensitivity classification has been reviewed.</dd>
+				</div>
+				<div>
+					<dt>BAA / vendor review</dt>
+					<dd>
+						Where applicable, whether the vendor/business-associate dependency has been addressed.
+					</dd>
+				</div>
+				<div>
+					<dt>Human accountability</dt>
+					<dd>Whether an accountable human owner is established.</dd>
+				</div>
+				<div>
+					<dt>Audit / logging readiness</dt>
+					<dd>Whether expected logging/traceability needs have been addressed.</dd>
+				</div>
+				<div>
+					<dt>Retention / residency review</dt>
+					<dd>Whether applicable storage-duration/location questions have been addressed.</dd>
+				</div>
+			</dl>
+			<h3>Control statuses</h3>
+			<dl class="status-list">
+				<div>
+					<dt>Open</dt>
+					<dd>Unresolved.</dd>
+				</div>
+				<div>
+					<dt>Satisfied</dt>
+					<dd>Recorded as addressed by a human.</dd>
+				</div>
+				<div>
+					<dt>Not Applicable</dt>
+					<dd>A human recorded that the control does not apply to the synthetic initiative.</dd>
+				</div>
+			</dl>
+		</section>
+
+		<section class="panel" aria-label="AI assistance and human authority">
+			<h2>AI assistance vs human authority</h2>
+			<p>
+				Existing AI content on these screens is fixture-based and read-only. AI is not executing
+				live in this deployed proof-of-work.
+			</p>
+			<div class="authority-grid">
+				<div class="authority-card">
+					<h3>AI assists with</h3>
+					<ul data-ai-assists>
+						<li>intake summaries</li>
+						<li>preliminary classification suggestions</li>
+						<li>missing-information prompts</li>
+						<li>possible risk indicators</li>
+						<li>draft leadership language</li>
+					</ul>
+				</div>
+				<div class="authority-card authority-human">
+					<h3>Humans retain authority over</h3>
+					<ul data-human-authority>
+						<li>recorded working classification</li>
+						<li>program-control status</li>
+						<li>initiative progression</li>
+						<li>launch approval</li>
+						<li>consequential decisions</li>
+					</ul>
+				</div>
+			</div>
+			<p class="principle">
+				AI can suggest. Deterministic rules can enforce defined checks. Humans remain accountable
+				for decisions.
+			</p>
+		</section>
+
+		<section class="panel" aria-label="Explore the demonstration">
+			<h2>Explore the demonstration</h2>
+			<ul class="explore-list">
+				<li>
+					<a href="#portfolio-dashboard">Portfolio Dashboard</a>
+					<p>
+						See the full synthetic initiative portfolio, lifecycle states, readiness, and
+						unresolved controls.
+					</p>
+				</li>
+				<li>
+					<a href="/initiatives/syn-internal-policy-assistant/intake">AI Workflow Intake</a>
+					<p>
+						See how an incomplete Draft is structured and how deterministic completeness remains
+						separate from AI suggestions and readiness.
+					</p>
+				</li>
+				<li>
+					<a href="/initiatives/syn-clinical-note-summarization/risk-precheck"
+						>PHI / PII Risk Pre-Check</a
+					>
+					<p>
+						See possible data-sensitivity indicators surfaced for human review without a
+						compliance determination.
+					</p>
+				</li>
+				<li>
+					<a href="/initiatives/syn-clinical-note-summarization"
+						>Workflow Detail / Program Controls</a
+					>
+					<p>
+						See owners, dependencies, recorded control decisions, readiness, and existing
+						AI-assisted suggestions for one initiative.
+					</p>
+				</li>
+				<li>
+					<a href="/leadership-brief">Leadership Brief</a>
+					<p>
+						See recorded portfolio data rolled up for leadership visibility without AI-generated
+						recommendations or approvals.
+					</p>
+				</li>
+			</ul>
+			<div class="start-callout">
+				<p class="start-label">Not sure where to start?</p>
+				<p>
+					The
+					<a href="/initiatives/syn-clinical-note-summarization"
+						>Clinical-note summarization pilot</a
+					>
+					is a clear walkthrough of Risk Review, Blocked readiness, Open program controls,
+					recorded human decisions, and AI-assisted possible indicators. It is a synthetic example,
+					not a real clinical implementation.
+				</p>
+			</div>
+		</section>
+
+		<p class="transparency" data-development-transparency>
+			Built with SvelteKit, TypeScript, Node.js, and synthetic data. Development was assisted by AI
+			coding tools under a stepwise validation, human-review, and version-control process.
 		</p>
-	</header>
-
-	<section class="summary" aria-label="Portfolio summary">
-		<div class="stat">
-			<p class="stat-label">Total initiatives</p>
-			<p class="stat-value" data-count="total">{totalCount}</p>
-		</div>
-		<div class="stat">
-			<p class="stat-label">Currently blocked</p>
-			<p class="stat-value" data-count="blocked">{blockedCount}</p>
-		</div>
-		<div class="stat">
-			<p class="stat-label">Ready for approval</p>
-			<p class="stat-value" data-count="ready-for-approval">{readyForApprovalCount}</p>
-		</div>
-		<div class="stat">
-			<p class="stat-label">In pilot</p>
-			<p class="stat-value" data-count="in-pilot">{inPilotCount}</p>
-		</div>
 	</section>
 
-	<section aria-label="Initiative list">
-		<table>
-			<caption>Synthetic initiative portfolio</caption>
-			<thead>
-				<tr>
-					<th scope="col">Name</th>
-					<th scope="col">Owner</th>
-					<th scope="col">Lifecycle</th>
-					<th scope="col">Readiness</th>
-					<th scope="col">Open gates</th>
-					<th scope="col">Last updated</th>
-				</tr>
-			</thead>
-			<tbody>
-				{#each initiatives as initiative (initiative.id)}
-					{@const open = openGates(initiative)}
-					<tr data-initiative-id={initiative.id} class:blocked={initiative.readiness === 'Blocked'}>
-						<th scope="row">
-							<a href="/initiatives/{initiative.id}">{initiative.name}</a>
-						</th>
-						<td>{ownerLabel(initiative.owner)}</td>
-						<td>{initiative.lifecycleState}</td>
-						<td>
-							<span
-								class="readiness"
-								class:readiness-blocked={initiative.readiness === 'Blocked'}
-								class:readiness-clear={initiative.readiness === 'Clear'}
-							>
-								{initiative.readiness}
-							</span>
-						</td>
-						<td>
-							<span data-open-count={open.length}>{open.length}</span>
-							{#if open.length > 0}
-								<ul class="gate-list">
-									{#each open as gate (gate.key)}
-										<li>{gate.label}</li>
-									{/each}
-								</ul>
-							{/if}
-						</td>
-						<td class="timestamp">{formatLastUpdated(initiative.lastUpdated)}</td>
+	<section id="portfolio-dashboard" class="dashboard" aria-label="Portfolio Dashboard">
+		<header class="header">
+			<h2>Portfolio Dashboard</h2>
+			<p class="subtitle">
+				Lightweight proof-of-work for structuring AI initiatives, showing dependencies, and
+				recording readiness. Humans retain authority over consequential decisions.
+			</p>
+		</header>
+
+		<section class="summary" aria-label="Portfolio summary">
+			<div class="stat">
+				<p class="stat-label">Total initiatives</p>
+				<p class="stat-value" data-count="total">{totalCount}</p>
+			</div>
+			<div class="stat">
+				<p class="stat-label">Currently blocked</p>
+				<p class="stat-value" data-count="blocked">{blockedCount}</p>
+			</div>
+			<div class="stat">
+				<p class="stat-label">Ready for approval</p>
+				<p class="stat-value" data-count="ready-for-approval">{readyForApprovalCount}</p>
+			</div>
+			<div class="stat">
+				<p class="stat-label">In pilot</p>
+				<p class="stat-value" data-count="in-pilot">{inPilotCount}</p>
+			</div>
+		</section>
+
+		<section aria-label="Initiative list">
+			<table>
+				<caption>Synthetic initiative portfolio</caption>
+				<thead>
+					<tr>
+						<th scope="col">Name</th>
+						<th scope="col">Owner</th>
+						<th scope="col">Lifecycle</th>
+						<th scope="col">Readiness</th>
+						<th scope="col">Open gates</th>
+						<th scope="col">Last updated</th>
 					</tr>
-				{/each}
-			</tbody>
-		</table>
-	</section>
+				</thead>
+				<tbody>
+					{#each initiatives as initiative (initiative.id)}
+						{@const open = openGates(initiative)}
+						<tr
+							data-initiative-id={initiative.id}
+							class:blocked={initiative.readiness === 'Blocked'}
+						>
+							<th scope="row">
+								<a href="/initiatives/{initiative.id}">{initiative.name}</a>
+							</th>
+							<td>{ownerLabel(initiative.owner)}</td>
+							<td>{initiative.lifecycleState}</td>
+							<td>
+								<span
+									class="readiness"
+									class:readiness-blocked={initiative.readiness === 'Blocked'}
+									class:readiness-clear={initiative.readiness === 'Clear'}
+								>
+									{initiative.readiness}
+								</span>
+							</td>
+							<td>
+								<span data-open-count={open.length}>{open.length}</span>
+								{#if open.length > 0}
+									<ul class="gate-list">
+										{#each open as gate (gate.key)}
+											<li>{gate.label}</li>
+										{/each}
+									</ul>
+								{/if}
+							</td>
+							<td class="timestamp">{formatLastUpdated(initiative.lastUpdated)}</td>
+						</tr>
+					{/each}
+				</tbody>
+			</table>
+		</section>
 
-	<p class="disclaimer" role="note">
-		All data on this page is synthetic. This application does not determine legal, regulatory, HIPAA,
-		privacy, or security compliance.
-	</p>
+		<p class="disclaimer" role="note">
+			All data on this page is synthetic. This application does not determine legal, regulatory,
+			HIPAA, privacy, or security compliance.
+		</p>
+	</section>
 </main>
 
 <style>
@@ -136,20 +352,174 @@
 		margin: 0 0 1.25rem;
 	}
 
-	.nav a {
+	.nav a,
+	.orientation a,
+	th a {
 		color: #1f4e46;
 	}
 
-	.header h1 {
+	.header h1,
+	.header h2 {
 		margin: 0 0 0.5rem;
-		font-size: 1.65rem;
 		font-weight: 650;
+	}
+
+	.header h1 {
+		font-size: 1.65rem;
+	}
+
+	.header h2 {
+		font-size: 1.35rem;
+	}
+
+	.eyebrow {
+		margin: 0 0 0.35rem;
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		color: #5c6570;
 	}
 
 	.subtitle {
 		margin: 0;
 		max-width: 42rem;
 		color: #4b5563;
+	}
+
+	.orientation {
+		margin: 0 0 2.25rem;
+	}
+
+	.panel,
+	.transparency,
+	.disclaimer,
+	.start-callout {
+		background: #fff;
+		border: 1px solid #d8d5cc;
+	}
+
+	.panel,
+	.transparency {
+		padding: 0.85rem 1rem;
+		margin: 1rem 0 0;
+	}
+
+	.panel h2,
+	.panel h3 {
+		margin: 0 0 0.5rem;
+	}
+
+	.panel h2 {
+		font-size: 1.15rem;
+	}
+
+	.panel h3 {
+		margin-top: 0.85rem;
+		font-size: 0.95rem;
+	}
+
+	.panel p {
+		margin: 0 0 0.75rem;
+	}
+
+	.panel p:last-child {
+		margin-bottom: 0;
+	}
+
+	.lifecycle-path {
+		padding: 0.55rem 0.7rem;
+		background: #f7f6f3;
+		border: 1px solid #e6e3db;
+		font-size: 0.95rem;
+	}
+
+	.readiness-defs,
+	.control-list,
+	.status-list {
+		margin: 0 0 0.75rem;
+	}
+
+	.readiness-defs div,
+	.control-list div,
+	.status-list div {
+		margin: 0 0 0.65rem;
+	}
+
+	.readiness-defs div:last-child,
+	.control-list div:last-child,
+	.status-list div:last-child {
+		margin-bottom: 0;
+	}
+
+	dt {
+		font-weight: 650;
+		margin: 0 0 0.15rem;
+	}
+
+	dd {
+		margin: 0;
+		color: #4b5563;
+	}
+
+	.authority-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+		gap: 0.75rem;
+		margin: 0 0 0.75rem;
+	}
+
+	.authority-card {
+		padding: 0.75rem 0.85rem;
+		background: #f7f6f3;
+		border: 1px solid #e6e3db;
+	}
+
+	.authority-human {
+		background: #eef3f1;
+		border-color: #d5e0dc;
+	}
+
+	.authority-card h3 {
+		margin: 0 0 0.45rem;
+	}
+
+	.authority-card ul,
+	.explore-list {
+		margin: 0;
+		padding-left: 1.1rem;
+	}
+
+	.principle {
+		margin: 0;
+		color: #4b5563;
+	}
+
+	.explore-list li + li {
+		margin-top: 0.75rem;
+	}
+
+	.explore-list p {
+		margin: 0.2rem 0 0;
+		color: #4b5563;
+	}
+
+	.start-callout {
+		margin: 1rem 0 0;
+		padding: 0.75rem 0.85rem;
+	}
+
+	.start-label {
+		margin: 0 0 0.35rem;
+		font-weight: 650;
+	}
+
+	.transparency {
+		color: #4b5563;
+		font-size: 0.9rem;
+	}
+
+	.dashboard {
+		scroll-margin-top: 1rem;
 	}
 
 	.summary {
@@ -244,15 +614,9 @@
 		font-size: 0.85rem;
 	}
 
-	th a {
-		color: #1f4e46;
-	}
-
 	.disclaimer {
 		margin: 1.5rem 0 0;
 		padding: 0.85rem 1rem;
-		background: #fff;
-		border: 1px solid #d8d5cc;
 		color: #4b5563;
 		font-size: 0.9rem;
 	}
