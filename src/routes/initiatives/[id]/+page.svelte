@@ -22,6 +22,8 @@
 <main class="page">
 	<p class="nav">
 		<a href="/">Portfolio Dashboard</a>
+		{' · '}
+		<a href="/initiatives/{initiative.id}/risk-precheck">View PHI / PII Risk Pre-Check</a>
 	</p>
 
 	<header class="header">

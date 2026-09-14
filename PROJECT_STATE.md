@@ -66,11 +66,12 @@ The work should demonstrate competency, judgment, structure, and attention to de
 - Stage-aware readiness: during `Draft` / `Intake Review`, `Open` gates do not by themselves make readiness `Blocked`. From `Risk Review` onward, any required `Open` gate makes readiness `Blocked`.
 - The root route renders a read-only Portfolio Dashboard from `SYNTHETIC_INITIATIVES`. No duplicate initiative data source.
 - Initiative names on the dashboard link to `/initiatives/{initiative.id}`. The detail route loads the matching fixture record; unknown IDs return SvelteKit 404.
+- `/initiatives/{id}/risk-precheck` is a read-only PHI / PII Risk Pre-Check. It loads the matching fixture record, separates recorded human classification from AI suggestions/indicators, and does not generate missing suggestions.
 - No further architecture decisions have been authorized.
 
 # Current Authorized Step
 
-Checkpointing Step 5 — read-only Workflow Detail / Program Controls validated.
+Checkpointing Step 6 — read-only PHI / PII Risk Pre-Check validated.
 
 # Completed and Validated Steps
 
@@ -80,6 +81,7 @@ Checkpointing Step 5 — read-only Workflow Detail / Program Controls validated.
 - **Step 3 — Define typed domain model and synthetic fixture data.** Completed and validated. Pending commit.
 - **Step 4 — Read-only Portfolio Dashboard.** Completed and validated. Pending commit.
 - **Step 5 — Read-only Workflow Detail / Program Controls.** Completed and validated. Pending commit.
+- **Step 6 — Read-only PHI / PII Risk Pre-Check.** Completed and validated. Pending commit.
 
 # Validation Evidence
 
@@ -179,6 +181,26 @@ Step 5 independently validated. Confirmed:
 - `npm run build` passed successfully.
 - No dependencies, persistence, auth, AI execution, workflow transitions, state-management libraries, or domain behavior changes were introduced.
 
+Step 6 independently validated. Confirmed:
+
+- Added: `src/routes/initiatives/[id]/risk-precheck/+page.ts`, `src/routes/initiatives/[id]/risk-precheck/+page.svelte`.
+- Initiative detail screen now links to the Risk Pre-Check using the fixture ID.
+- Risk Pre-Check loads directly from `SYNTHETIC_INITIATIVES`.
+- Unknown IDs return SvelteKit 404 with `Initiative not found`.
+- Screen explicitly separates: recorded human classification; AI-assisted preliminary classification suggestion; AI-assisted possible risk indicators; recorded program controls; compliance determination.
+- AI suggestions/indicators are displayed only when already present in fixture data; none are generated or inferred by the screen.
+- Stage-aware readiness uses the existing validated domain constant and policy.
+- Program Controls renders all seven gates.
+- Human Authority section explicitly preserves human responsibility for classification, gate status, and progression decisions.
+- Synthetic/no-compliance disclaimer is visible.
+- Runtime validation confirmed: Clinical-note summarization pilot — Risk Review, Blocked, PHI described, expected AI suggestion/indicator and two Open blocking controls.
+- Runtime validation confirmed: Scheduling assistant — Ready for Approval, Clear, Neither PHI nor PII described, no invented preliminary suggestion, no invented risk indicators.
+- Both scenarios render seven controls.
+- Unknown ID returns HTTP 404 with `Initiative not found`.
+- `npm run check` passed with 0 errors and 0 warnings.
+- `npm run build` passed successfully.
+- No dependencies, domain behavior, persistence, auth, AI execution, workflow transitions, APIs, or state-management libraries were introduced.
+
 # Known-Good Checkpoints
 
 - **Checkpoint 0:** Step 0 repository governance and project-state documentation. Completed, validated, committed, and pushed.
@@ -193,6 +215,7 @@ Step 5 independently validated. Confirmed:
 - **Checkpoint 3 (pending commit):** Validated typed domain model and synthetic fixture dataset. Pending authorized commit.
 - **Checkpoint 4 (pending commit):** Validated read-only Portfolio Dashboard. Pending authorized commit.
 - **Checkpoint 5 (pending commit):** Validated read-only Workflow Detail / Program Controls screen. Pending authorized commit.
+- **Checkpoint 6 (pending commit):** Validated read-only PHI / PII Risk Pre-Check. Pending authorized commit.
 
 # Blockers
 
