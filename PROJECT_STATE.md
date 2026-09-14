@@ -68,11 +68,12 @@ The work should demonstrate competency, judgment, structure, and attention to de
 - Initiative names on the dashboard link to `/initiatives/{initiative.id}`. The detail route loads the matching fixture record; unknown IDs return SvelteKit 404.
 - `/initiatives/{id}/risk-precheck` is a read-only PHI / PII Risk Pre-Check. It loads the matching fixture record, separates recorded human classification from AI suggestions/indicators, and does not generate missing suggestions.
 - `/leadership-brief` is a read-only Leadership Brief derived from `SYNTHETIC_INITIATIVES`. Existing `leadership_draft` suggestions are shown separately and are not the recorded brief.
+- `/initiatives/{id}/intake` is a read-only AI Workflow Intake. It loads the matching fixture record, evaluates deterministic intake completeness separately from readiness, and displays existing AI suggestions separately from recorded human data.
 - No further architecture decisions have been authorized.
 
 # Current Authorized Step
 
-Checkpointing Step 7 — read-only Leadership Brief validated.
+Checkpointing Step 8 — read-only AI Workflow Intake validated.
 
 # Completed and Validated Steps
 
@@ -83,7 +84,8 @@ Checkpointing Step 7 — read-only Leadership Brief validated.
 - **Step 4 — Read-only Portfolio Dashboard.** Completed, validated, committed, and pushed.
 - **Step 5 — Read-only Workflow Detail / Program Controls.** Completed, validated, committed, and pushed.
 - **Step 6 — Read-only PHI / PII Risk Pre-Check.** Completed, validated, committed, and pushed.
-- **Step 7 — Read-only Leadership Brief.** Completed and validated. Pending commit.
+- **Step 7 — Read-only Leadership Brief.** Completed, validated, committed, and pushed.
+- **Step 8 — Read-only AI Workflow Intake.** Completed and validated. Pending commit.
 
 # Validation Evidence
 
@@ -220,6 +222,25 @@ Step 7 independently validated. Confirmed:
 - `npm run build` passed successfully.
 - No dependencies, domain behavior, persistence, auth, workflow transitions, API calls, or state-management libraries were introduced.
 
+Step 8 independently validated. Confirmed:
+
+- Added: `src/routes/initiatives/[id]/intake/+page.ts`, `src/routes/initiatives/[id]/intake/+page.svelte`.
+- Initiative detail screen now links to `/initiatives/{initiative.id}/intake`.
+- Intake route loads directly from `SYNTHETIC_INITIATIVES`.
+- Unknown IDs return SvelteKit 404 with `Initiative not found`.
+- Initial-product required intake fields are exactly: initiative name; problem / outcome; intended users; synthetic data description; tools / vendors; owner; sponsor; success signal.
+- Known constraints is displayed but is not required for submission.
+- Deterministic incompleteness means null, empty/whitespace-only, or the explicit synthetic placeholder `Not yet specified`.
+- Intake completeness remains separate from readiness.
+- Internal policy assistant runtime validation: Draft; Clear; Complete fields 4 of 8; Incomplete fields 4; incomplete: Tools / vendors, Owner, Sponsor, Success signal.
+- Scheduling assistant runtime validation: Ready for Approval; Clear; Complete fields 8 of 8; Incomplete fields 0.
+- AI intake summary, missing-information suggestions, and preliminary-classification suggestions are displayed separately from deterministic completeness and recorded human data.
+- Human submission boundary is explicit: no Save/Submit controls; submission is a human action; completing required fields does not auto-submit; AI cannot submit or advance lifecycle.
+- Unknown intake ID returns HTTP 404 with `Initiative not found`.
+- `npm run check` passed with 0 errors and 0 warnings.
+- `npm run build` passed successfully.
+- No dependencies, domain behavior, persistence, auth, workflow mutations, API calls, or state-management libraries were introduced.
+
 # Known-Good Checkpoints
 
 - **Checkpoint 0:** Step 0 repository governance and project-state documentation. Completed, validated, committed, and pushed.
@@ -250,7 +271,11 @@ Step 7 independently validated. Confirmed:
   - Commit: `b0090ff`
   - Message: `Add validated PHI PII risk pre-check`
   - Remote branch: `origin/main`
-- **Checkpoint 7 (pending commit):** Validated read-only Leadership Brief. Pending authorized commit.
+- **Checkpoint 7:** Step 7 read-only Leadership Brief. Completed, validated, committed, and pushed.
+  - Commit: `9f0126b`
+  - Message: `Add validated leadership brief`
+  - Remote branch: `origin/main`
+- **Checkpoint 8 (pending commit):** Validated read-only AI Workflow Intake. Pending authorized commit.
 
 # Blockers
 

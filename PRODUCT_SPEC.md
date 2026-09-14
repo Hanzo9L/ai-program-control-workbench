@@ -56,10 +56,12 @@ No step after Draft advances without a recorded human action in the initial prod
 
 - **Purpose:** Structure an idea into a reviewable initiative.
 - **Key information captured:** Name; problem/outcome; intended users; data involved (synthetic description only); tools/vendors; owner; sponsor; success signal; known constraints.
+- **Required for submission (initial product):** initiative name; problem / outcome; intended users; synthetic data description; tools / vendors; owner; sponsor; success signal. Known constraints is captured and displayed but is not required for submission in the initial product.
+- **Intake completeness:** A required field is incomplete when it is null; empty or whitespace-only; or its recorded value is the explicit synthetic placeholder `Not yet specified`. This placeholder rule is deterministic and specific to the synthetic proof-of-work dataset. It must not be generalized into AI/semantic interpretation. Incomplete required intake fields may prevent submission. During `Draft` / `Intake Review`, incompleteness does not by itself set readiness to `Blocked`. Completing required fields does not automatically submit or advance lifecycle.
 - **User action:** Save Draft; submit for Intake Review.
 - **AI-assisted behavior:** Summarize the intake; flag missing required fields; suggest a preliminary data-sensitivity label and likely applicable gates. Suggestions are labeled as suggestions.
 - **Human decision/approval:** Submit for review; accept, edit, or reject suggested classification before it becomes the recorded working classification.
-- **Must not happen automatically:** Submit, classification finalization, or skip of missing required fields. Missing or incomplete intake information may prevent submission; that is an intake validation condition, not readiness `Blocked`.
+- **Must not happen automatically:** Submit, classification finalization, or skip of missing required fields. Missing or incomplete intake information may prevent submission; that is an intake validation condition, not readiness `Blocked`. Completing required fields does not automatically submit or advance lifecycle.
 
 ## 5.3 PHI / PII Risk Pre-Check
 
@@ -198,7 +200,7 @@ Do not implement now. Candidates only if policy allows, criteria are explicit, t
 
 Automation may reduce clerical friction. It must not take accountable organizational decisions away from humans.
 
-1. **Deterministic submit-blocking** when required intake fields are empty (no model judgment). A human still explicitly submits once required fields are complete. Do not auto-move `Draft` → `Intake Review`.
+1. **Deterministic submit-blocking** when required intake fields are incomplete (null, empty/whitespace-only, or the synthetic placeholder `Not yet specified`; no model judgment). A human still explicitly submits once required fields are complete. Do not auto-move `Draft` → `Intake Review`.
 2. **Suggest `Not Applicable`** on `baa_vendor_review` for human confirmation when deterministic criteria indicate no external vendor is involved. Do not auto-set `Not Applicable`.
 3. **Stale-Blocked reminder** when readiness has been `Blocked` beyond a defined age (notification, not lifecycle or readiness change).
 4. **Leadership-brief regeneration** when underlying counts/gates change, still requiring human “mark reviewed” before it is the official brief.
@@ -209,7 +211,7 @@ Consequential approvals and compliance language remain out of scope for automati
 
 Fictional only. They do not represent a real health system, real patients, or a real implementation.
 
-1. **Internal policy assistant** — Lifecycle: `Draft`. Readiness: `Clear`. Q&A over published internal policy PDFs. No PHI/PII described. Owner not yet named. Gates may remain `Open`. Exercises incomplete intake: missing required fields prevent submission (intake validation), which is not readiness `Blocked`.
+1. **Internal policy assistant** — Lifecycle: `Draft`. Readiness: `Clear`. Q&A over published internal policy PDFs. No PHI/PII described. Owner not named; sponsor not named; tools / vendors and success signal recorded as `Not yet specified`. Known constraints is recorded and displayed but is not required for submission. Gates may remain `Open`. Exercises incomplete intake: those required fields are incomplete and may prevent submission (intake validation), which is not readiness `Blocked`.
 2. **Scheduling assistant** — Lifecycle: `Ready for Approval`. Readiness: `Clear`. Helps staff propose meeting times from calendar metadata. Sensitivity recorded as non-PHI. Gates `Satisfied` or `Not Applicable`. Exercises a clean approval queue.
 3. **Clinical-note summarization pilot** — Lifecycle: `Risk Review`. Readiness: `Blocked`. Summarizes synthetic clinical notes for a named clinician owner. `data_sensitivity_review` Open; `storage_tool_approval` Open. Exercises high-sensitivity review without a compliance claim.
 4. **Claims-document triage pilot** — Lifecycle: `In Pilot`. Readiness: `Clear`. Routes synthetic claims documents to work queues. Vendor recorded; `baa_vendor_review` Satisfied by a named human. Exercises post-approval pilot state.
@@ -246,7 +248,7 @@ Initial data may be in-memory or local static/synthetic fixtures. Persistence de
 
 The MVP is complete when all of the following are demonstrable with synthetic data:
 
-1. User can create an initiative, save `Draft`, and explicitly submit to `Intake Review`. Missing required fields prevent submission; they do not auto-submit when complete.
+1. User can create an initiative, save `Draft`, and explicitly submit to `Intake Review`. The eight required intake fields (initiative name; problem / outcome; intended users; synthetic data description; tools / vendors; owner; sponsor; success signal) must be complete before submission. A required field is incomplete when it is null, empty or whitespace-only, or recorded as `Not yet specified`. Incomplete required fields prevent submission; completing them does not auto-submit or advance lifecycle. During `Draft` / `Intake Review`, intake incompleteness does not by itself set readiness to `Blocked`. Known constraints is captured and displayed but is not required for submission.
 2. Five screens exist and show the same initiative record consistently, including lifecycle state and independent readiness.
 3. All seven lifecycle states can be represented; readiness `Blocked` and `Clear` can be represented independently; at least the five synthetic examples are visible.
 4. Gate statuses `Open`, `Satisfied`, and `Not Applicable` can be recorded by a human; AI cannot mark gates `Satisfied` or `Not Applicable`. There is no `Waived` status.
