@@ -51,6 +51,12 @@
 				with accountable humans.
 			</p>
 			<p>
+				This proof-of-work does not claim to know an organization’s answers. It demonstrates a
+				practical way to make sure the right questions are surfaced, the right people are
+				accountable for answering them, and unresolved dependencies remain visible before work
+				moves forward.
+			</p>
+			<p>
 				All application data is synthetic. It does not represent any healthcare organization’s
 				systems, policies, architecture, workflows, or compliance requirements. It does not
 				determine legal, regulatory, HIPAA, privacy, or security compliance.
