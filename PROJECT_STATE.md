@@ -49,17 +49,20 @@ The work should demonstrate competency, judgment, structure, and attention to de
 
 # Architecture Decisions
 
-- Implementation target (authorized as target only; not yet implemented): SvelteKit + TypeScript + Node.js, deployable on Vercel.
-- Application scaffolding is **not** authorized in Step 0.
+- Implementation target: SvelteKit + TypeScript + Node.js, deployable on Vercel.
+- Step 1 established the official `sv@0.17.0` minimal TypeScript baseline in the existing repository root.
+- Adapter is `@sveltejs/adapter-auto` (generator default). Vercel-specific adapter configuration is not authorized.
+- Application scaffolding was **not** authorized in Step 0.
 - No further architecture decisions have been authorized.
 
 # Current Authorized Step
 
-None. Step 0 is completed, validated, committed, and pushed. Awaiting next authorization.
+Checkpointing Step 1 — clean SvelteKit application baseline validated.
 
 # Completed and Validated Steps
 
 - **Step 0 — Establish repository governance and project-state documentation.** Completed, validated, committed, and pushed.
+- **Step 1 — Scaffold and validate the application baseline.** Completed and validated. Pending commit.
 
 # Validation Evidence
 
@@ -89,12 +92,26 @@ git branch --show-current
 git status --short
 ```
 
+Step 1 independently validated. Confirmed:
+
+- Scaffold command used: `npx --yes sv create . --template minimal --types ts --no-add-ons --install npm --no-dir-check --no-download-check`
+- Runtime: Node.js `v24.11.1`, npm `11.8.0`
+- Installed baseline: Svelte `5.57.0`, SvelteKit `2.70.3`, Vite `8.3.0`, `@sveltejs/adapter-auto` `7.0.1`
+- `npm run check` passed with 0 errors and 0 warnings.
+- `npm run build` passed successfully.
+- Local `adapter-auto` environment warning is expected and is not a build failure.
+- `CLAUDE.md` and `PROJECT_STATE.md` were unchanged during scaffold validation.
+- No workbench, healthcare, AI, API, database, auth, dashboard, risk, PHI/PII, or business logic was introduced.
+- Git branch remains `main`.
+- Remote remains `origin`.
+
 # Known-Good Checkpoints
 
 - **Checkpoint 0:** Step 0 repository governance and project-state documentation. Completed, validated, committed, and pushed.
   - Commit: `474ea3e5008aacc388b2a5b458c01856eea32d3d`
   - Message: `Initialize project governance and state tracking`
   - Remote branch: `origin/main`
+- **Checkpoint 1 (pending commit):** Step 1 clean SvelteKit application baseline. Completed and validated. Pending authorized commit.
 
 # Blockers
 
