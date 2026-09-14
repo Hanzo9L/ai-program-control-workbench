@@ -73,7 +73,7 @@ The work should demonstrate competency, judgment, structure, and attention to de
 
 # Current Authorized Step
 
-Checkpointing Step 8 — read-only AI Workflow Intake validated.
+PAUSED — Checkpoint 8 is the last known-good state. Five-screen read-only MVP validated.
 
 # Completed and Validated Steps
 
@@ -85,7 +85,7 @@ Checkpointing Step 8 — read-only AI Workflow Intake validated.
 - **Step 5 — Read-only Workflow Detail / Program Controls.** Completed, validated, committed, and pushed.
 - **Step 6 — Read-only PHI / PII Risk Pre-Check.** Completed, validated, committed, and pushed.
 - **Step 7 — Read-only Leadership Brief.** Completed, validated, committed, and pushed.
-- **Step 8 — Read-only AI Workflow Intake.** Completed and validated. Pending commit.
+- **Step 8 — Read-only AI Workflow Intake.** Completed, validated, committed, and pushed.
 
 # Validation Evidence
 
@@ -275,7 +275,49 @@ Step 8 independently validated. Confirmed:
   - Commit: `9f0126b`
   - Message: `Add validated leadership brief`
   - Remote branch: `origin/main`
-- **Checkpoint 8 (pending commit):** Validated read-only AI Workflow Intake. Pending authorized commit.
+- **Checkpoint 8:** Step 8 read-only AI Workflow Intake. Completed, validated, committed, and pushed.
+  - Commit: `836a90b`
+  - Message: `Add validated read-only AI workflow intake`
+  - Remote branch: `origin/main`
+
+# Last Known-Good Checkpoint
+
+- **Checkpoint 8**
+- Commit: `836a90b`
+- Message: `Add validated read-only AI workflow intake`
+- Branch: `main`
+- Remote: `origin/main`
+- Local and remote synchronized.
+
+# Current Validated Application State
+
+The complete five-screen read-only product shape is implemented and validated:
+
+- Portfolio Dashboard
+- AI Workflow Intake
+- PHI / PII Risk Pre-Check
+- Workflow Detail / Program Controls
+- Leadership Brief
+
+Supporting validated foundations:
+
+- SvelteKit / TypeScript / Node.js baseline
+- typed domain model
+- five synthetic initiative fixtures
+- deterministic stage-aware readiness
+- deterministic intake completeness
+- program-control gate model
+- human/AI authority boundaries
+- runtime validation for representative Clear, Blocked, incomplete-intake, leadership-summary, and 404 scenarios
+- synthetic data only
+- no persistence
+- no authentication
+- no live AI/API integration
+- no workflow mutations
+
+# Stopping-Point Rule
+
+No implementation work is currently authorized.
 
 # Blockers
 
@@ -287,4 +329,31 @@ None recorded.
 
 # Next Authorized Step
 
-Not yet authorized.
+Not yet authorized. Recommended next phase: demo/deployment hardening before workflow mutations.
+
+# Resume From Here
+
+Begin by verifying:
+
+```
+git status --short
+git status -sb
+git log -3 --oneline
+```
+
+Expected HEAD: `836a90b Add validated read-only AI workflow intake`
+
+Re-read:
+
+- `PROJECT_STATE.md`
+- `CLAUDE.md`
+- `PRODUCT_SPEC.md`
+
+Do not begin feature work until a new step is explicitly authorized.
+
+Recommended next work:
+
+- README/demo documentation
+- Vercel deployment/configuration
+- final visual/demo review
+- only then decide whether any mutation behavior is necessary
