@@ -74,7 +74,9 @@
 				{#each initiatives as initiative (initiative.id)}
 					{@const open = openGates(initiative)}
 					<tr data-initiative-id={initiative.id} class:blocked={initiative.readiness === 'Blocked'}>
-						<th scope="row">{initiative.name}</th>
+						<th scope="row">
+							<a href="/initiatives/{initiative.id}">{initiative.name}</a>
+						</th>
 						<td>{ownerLabel(initiative.owner)}</td>
 						<td>{initiative.lifecycleState}</td>
 						<td>
@@ -229,6 +231,10 @@
 		white-space: nowrap;
 		color: #4b5563;
 		font-size: 0.85rem;
+	}
+
+	th a {
+		color: #1f4e46;
 	}
 
 	.disclaimer {

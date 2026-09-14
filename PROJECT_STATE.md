@@ -65,11 +65,12 @@ The work should demonstrate competency, judgment, structure, and attention to de
 - Typed domain model and synthetic fixtures live in `src/lib/domain/types.ts`, `constants.ts`, `fixtures.ts`, and `validation.ts`.
 - Stage-aware readiness: during `Draft` / `Intake Review`, `Open` gates do not by themselves make readiness `Blocked`. From `Risk Review` onward, any required `Open` gate makes readiness `Blocked`.
 - The root route renders a read-only Portfolio Dashboard from `SYNTHETIC_INITIATIVES`. No duplicate initiative data source.
+- Initiative names on the dashboard link to `/initiatives/{initiative.id}`. The detail route loads the matching fixture record; unknown IDs return SvelteKit 404.
 - No further architecture decisions have been authorized.
 
 # Current Authorized Step
 
-Checkpointing Step 4 — read-only Portfolio Dashboard validated.
+Checkpointing Step 5 — read-only Workflow Detail / Program Controls validated.
 
 # Completed and Validated Steps
 
@@ -78,6 +79,7 @@ Checkpointing Step 4 — read-only Portfolio Dashboard validated.
 - **Step 2 — Define the product shape and workflow/state model.** Completed and validated. Pending commit.
 - **Step 3 — Define typed domain model and synthetic fixture data.** Completed and validated. Pending commit.
 - **Step 4 — Read-only Portfolio Dashboard.** Completed and validated. Pending commit.
+- **Step 5 — Read-only Workflow Detail / Program Controls.** Completed and validated. Pending commit.
 
 # Validation Evidence
 
@@ -163,6 +165,20 @@ Step 4 independently validated. Confirmed:
 - Only `src/routes/+page.svelte` was changed for implementation.
 - No dependencies, domain behavior, persistence, auth, AI behavior, workflow transitions, APIs, or state-management libraries were introduced.
 
+Step 5 independently validated. Confirmed:
+
+- Added: `src/routes/initiatives/[id]/+page.ts`, `src/routes/initiatives/[id]/+page.svelte`.
+- Portfolio Dashboard initiative names now link to `/initiatives/{initiative.id}`.
+- Detail route loads the matching initiative from `SYNTHETIC_INITIATIVES`.
+- Unknown IDs return SvelteKit 404 with `Initiative not found`.
+- Detail screen renders: lifecycle; readiness; owner; sponsor; problem/outcome; intended users; synthetic data description; tools/vendors; success signal; known constraints; classification; last updated; initiative notes; all seven program controls; recorded human actor/timestamp where present; AI-assisted suggestions separately from recorded human decisions.
+- Runtime validation confirmed: Clear initiative route returns 200 and renders Scheduling assistant, Ready for Approval, Clear.
+- Runtime validation confirmed: Blocked initiative renders Clinical-note summarization pilot, Risk Review, Blocked; blocking gates Storage / tool approval and Data sensitivity review render; all seven controls render.
+- Runtime validation confirmed: nonexistent initiative returns HTTP 404 with `Initiative not found`.
+- `npm run check` passed with 0 errors and 0 warnings.
+- `npm run build` passed successfully.
+- No dependencies, persistence, auth, AI execution, workflow transitions, state-management libraries, or domain behavior changes were introduced.
+
 # Known-Good Checkpoints
 
 - **Checkpoint 0:** Step 0 repository governance and project-state documentation. Completed, validated, committed, and pushed.
@@ -176,6 +192,7 @@ Step 4 independently validated. Confirmed:
 - **Checkpoint 2 (pending commit):** Validated product behavior specification. Pending authorized commit.
 - **Checkpoint 3 (pending commit):** Validated typed domain model and synthetic fixture dataset. Pending authorized commit.
 - **Checkpoint 4 (pending commit):** Validated read-only Portfolio Dashboard. Pending authorized commit.
+- **Checkpoint 5 (pending commit):** Validated read-only Workflow Detail / Program Controls screen. Pending authorized commit.
 
 # Blockers
 
