@@ -64,11 +64,12 @@ The work should demonstrate competency, judgment, structure, and attention to de
 - Initial product uses synthetic data only.
 - Typed domain model and synthetic fixtures live in `src/lib/domain/types.ts`, `constants.ts`, `fixtures.ts`, and `validation.ts`.
 - Stage-aware readiness: during `Draft` / `Intake Review`, `Open` gates do not by themselves make readiness `Blocked`. From `Risk Review` onward, any required `Open` gate makes readiness `Blocked`.
+- The root route renders a read-only Portfolio Dashboard from `SYNTHETIC_INITIATIVES`. No duplicate initiative data source.
 - No further architecture decisions have been authorized.
 
 # Current Authorized Step
 
-Checkpointing Step 3 — typed domain model and synthetic fixtures validated.
+Checkpointing Step 4 — read-only Portfolio Dashboard validated.
 
 # Completed and Validated Steps
 
@@ -76,6 +77,7 @@ Checkpointing Step 3 — typed domain model and synthetic fixtures validated.
 - **Step 1 — Scaffold and validate the application baseline.** Completed, validated, committed, and pushed.
 - **Step 2 — Define the product shape and workflow/state model.** Completed and validated. Pending commit.
 - **Step 3 — Define typed domain model and synthetic fixture data.** Completed and validated. Pending commit.
+- **Step 4 — Read-only Portfolio Dashboard.** Completed and validated. Pending commit.
 
 # Validation Evidence
 
@@ -148,6 +150,19 @@ Step 3 independently validated. Confirmed:
 - No dependencies were added.
 - No routes/components, auth, persistence, API code, state-management libraries, or workflow engine were introduced.
 
+Step 4 independently validated. Confirmed:
+
+- Root route now renders the read-only Portfolio Dashboard directly from `SYNTHETIC_INITIATIVES`.
+- No duplicate/hard-coded initiative data source was introduced.
+- Dashboard displays: total initiatives; blocked count; Ready for Approval count; In Pilot count; initiative name; owner; lifecycle; readiness; open gate count and labels; last updated.
+- Derived validated counts: Total 5; Blocked 2; Ready for Approval 1; In Pilot 1.
+- Runtime HTML validation confirmed all five synthetic initiative names render.
+- Runtime HTML validation confirmed the synthetic-data / no-compliance disclaimer renders.
+- `npm run check` passed with 0 errors and 0 warnings.
+- `npm run build` passed.
+- Only `src/routes/+page.svelte` was changed for implementation.
+- No dependencies, domain behavior, persistence, auth, AI behavior, workflow transitions, APIs, or state-management libraries were introduced.
+
 # Known-Good Checkpoints
 
 - **Checkpoint 0:** Step 0 repository governance and project-state documentation. Completed, validated, committed, and pushed.
@@ -160,6 +175,7 @@ Step 3 independently validated. Confirmed:
   - Remote branch: `origin/main`
 - **Checkpoint 2 (pending commit):** Validated product behavior specification. Pending authorized commit.
 - **Checkpoint 3 (pending commit):** Validated typed domain model and synthetic fixture dataset. Pending authorized commit.
+- **Checkpoint 4 (pending commit):** Validated read-only Portfolio Dashboard. Pending authorized commit.
 
 # Blockers
 
