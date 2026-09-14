@@ -53,16 +53,26 @@ The work should demonstrate competency, judgment, structure, and attention to de
 - Step 1 established the official `sv@0.17.0` minimal TypeScript baseline in the existing repository root.
 - Adapter is `@sveltejs/adapter-auto` (generator default). Vercel-specific adapter configuration is not authorized.
 - Application scaffolding was **not** authorized in Step 0.
+- `PRODUCT_SPEC.md` is the authoritative product behavior specification.
+- Five-screen model: Portfolio Dashboard; AI Workflow Intake; PHI / PII Risk Pre-Check; Workflow Detail / Program Controls; Leadership Brief.
+- Seven lifecycle states: `Draft` → `Intake Review` → `Risk Review` → `Ready for Approval` → `Approved for Launch` → `In Pilot` → `Complete`.
+- Readiness is independent of lifecycle: `Blocked` | `Clear`. Blocking does not change lifecycle state. Resolving blockers does not advance lifecycle state.
+- Gate statuses: `Open` | `Satisfied` | `Not Applicable`. No `Waived` status or invented organizational waiver authority.
+- AI may assist with summarization, preliminary classification suggestions, missing-information detection, risk indicators, and leadership-draft generation. AI may not submit intake, finalize classification, set gate status, change lifecycle state, approve launch, or declare compliance.
+- Consequential progression remains explicit human action.
+- Future automation candidates are limited to reducing clerical friction and remain subject to defined criteria, testing, policy, reliability requirements, and owner approval.
+- Initial product uses synthetic data only.
 - No further architecture decisions have been authorized.
 
 # Current Authorized Step
 
-Checkpointing Step 1 — clean SvelteKit application baseline validated.
+Checkpointing Step 2 — product behavior specification validated.
 
 # Completed and Validated Steps
 
 - **Step 0 — Establish repository governance and project-state documentation.** Completed, validated, committed, and pushed.
-- **Step 1 — Scaffold and validate the application baseline.** Completed and validated. Pending commit.
+- **Step 1 — Scaffold and validate the application baseline.** Completed, validated, committed, and pushed.
+- **Step 2 — Define the product shape and workflow/state model.** Completed and validated. Pending commit.
 
 # Validation Evidence
 
@@ -105,13 +115,33 @@ Step 1 independently validated. Confirmed:
 - Git branch remains `main`.
 - Remote remains `origin`.
 
+Step 2 independently reviewed and validated by the project architect. Confirmed:
+
+- `PRODUCT_SPEC.md` is now the authoritative product behavior specification.
+- Five-screen model: Portfolio Dashboard; AI Workflow Intake; PHI / PII Risk Pre-Check; Workflow Detail / Program Controls; Leadership Brief.
+- Seven lifecycle states: `Draft` → `Intake Review` → `Risk Review` → `Ready for Approval` → `Approved for Launch` → `In Pilot` → `Complete`.
+- Readiness is independent: `Blocked` | `Clear`.
+- Blocking does not change lifecycle state.
+- Resolving blockers does not advance lifecycle state.
+- Gate statuses: `Open` | `Satisfied` | `Not Applicable`.
+- No `Waived` status or invented organizational waiver authority.
+- AI may assist with summarization, preliminary classification suggestions, missing-information detection, risk indicators, and leadership-draft generation.
+- AI may not submit intake, finalize classification, set gate status, change lifecycle state, approve launch, or declare compliance.
+- Consequential progression remains explicit human action.
+- Future automation candidates are limited to reducing clerical friction and remain subject to defined criteria, testing, policy, reliability requirements, and owner approval.
+- Initial product uses synthetic data only.
+
 # Known-Good Checkpoints
 
 - **Checkpoint 0:** Step 0 repository governance and project-state documentation. Completed, validated, committed, and pushed.
   - Commit: `474ea3e5008aacc388b2a5b458c01856eea32d3d`
   - Message: `Initialize project governance and state tracking`
   - Remote branch: `origin/main`
-- **Checkpoint 1 (pending commit):** Step 1 clean SvelteKit application baseline. Completed and validated. Pending authorized commit.
+- **Checkpoint 1:** Step 1 clean SvelteKit application baseline. Completed, validated, committed, and pushed.
+  - Commit: `375a45d`
+  - Message: `Establish validated SvelteKit baseline`
+  - Remote branch: `origin/main`
+- **Checkpoint 2 (pending commit):** Validated product behavior specification. Pending authorized commit.
 
 # Blockers
 
