@@ -1,4 +1,5 @@
 <script lang="ts">
+	import AppNav from '$lib/components/AppNav.svelte';
 	import { PRE_RISK_REVIEW_STATES } from '$lib/domain/constants';
 	import type { Initiative } from '$lib/domain/types';
 
@@ -78,11 +79,7 @@
 </svelte:head>
 
 <main class="page">
-	<p class="nav">
-		<a href="/">Portfolio Dashboard</a>
-		{' · '}
-		<a href="/initiatives/{initiative.id}">Initiative detail</a>
-	</p>
+	<AppNav initiativeId={initiative.id} active="intake" />
 
 	<header class="header">
 		<p class="eyebrow">AI Workflow Intake</p>
@@ -284,14 +281,6 @@
 		max-width: 68rem;
 		margin: 0 auto;
 		padding: 2rem 1.25rem 3rem;
-	}
-
-	.nav {
-		margin: 0 0 1.25rem;
-	}
-
-	.nav a {
-		color: #1f4e46;
 	}
 
 	.eyebrow {

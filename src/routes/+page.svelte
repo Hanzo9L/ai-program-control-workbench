@@ -1,4 +1,5 @@
 <script lang="ts">
+	import AppNav from '$lib/components/AppNav.svelte';
 	import { SYNTHETIC_INITIATIVES } from '$lib/domain/fixtures';
 	import type { Initiative } from '$lib/domain/types';
 
@@ -30,9 +31,7 @@
 </svelte:head>
 
 <main class="page">
-	<p class="nav">
-		<a href="/leadership-brief">Leadership Brief</a>
-	</p>
+	<AppNav active="overview" />
 
 	<section class="orientation" aria-label="Demo orientation and data guide">
 		<header class="header">
@@ -348,11 +347,6 @@
 		padding: 2rem 1.25rem 3rem;
 	}
 
-	.nav {
-		margin: 0 0 1.25rem;
-	}
-
-	.nav a,
 	.orientation a,
 	th a {
 		color: #1f4e46;

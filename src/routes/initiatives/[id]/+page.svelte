@@ -1,4 +1,5 @@
 <script lang="ts">
+	import AppNav from '$lib/components/AppNav.svelte';
 	import type { Initiative } from '$lib/domain/types';
 
 	let { data }: { data: { initiative: Initiative } } = $props();
@@ -20,13 +21,7 @@
 </svelte:head>
 
 <main class="page">
-	<p class="nav">
-		<a href="/">Portfolio Dashboard</a>
-		{' · '}
-		<a href="/initiatives/{initiative.id}/risk-precheck">View PHI / PII Risk Pre-Check</a>
-		{' · '}
-		<a href="/initiatives/{initiative.id}/intake">View AI Workflow Intake</a>
-	</p>
+	<AppNav initiativeId={initiative.id} active="program-controls" />
 
 	<header class="header">
 		<h1 data-initiative-name>{initiative.name}</h1>
@@ -191,23 +186,11 @@
 		padding: 2rem 1.25rem 3rem;
 	}
 
-	.nav {
-		margin: 0 0 1.25rem;
-	}
-
-	.nav a,
-	.header h1 {
-		color: inherit;
-	}
-
-	.nav a {
-		color: #1f4e46;
-	}
-
 	.header h1 {
 		margin: 0 0 0.5rem;
 		font-size: 1.65rem;
 		font-weight: 650;
+		color: inherit;
 	}
 
 	.meta {

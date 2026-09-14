@@ -1,4 +1,5 @@
 <script lang="ts">
+	import AppNav from '$lib/components/AppNav.svelte';
 	import { LIFECYCLE_STATES, PRE_RISK_REVIEW_STATES } from '$lib/domain/constants';
 	import { SYNTHETIC_INITIATIVES } from '$lib/domain/fixtures';
 	import type { Gate, Initiative, LifecycleState } from '$lib/domain/types';
@@ -78,9 +79,7 @@
 </svelte:head>
 
 <main class="page">
-	<p class="nav">
-		<a href="/">Portfolio Dashboard</a>
-	</p>
+	<AppNav active="leadership" />
 
 	<header class="header">
 		<h1>Leadership Brief</h1>
@@ -246,11 +245,6 @@
 		padding: 2rem 1.25rem 3rem;
 	}
 
-	.nav {
-		margin: 0 0 1.25rem;
-	}
-
-	.nav a,
 	a {
 		color: #1f4e46;
 	}

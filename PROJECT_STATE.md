@@ -70,11 +70,12 @@ The work should demonstrate competency, judgment, structure, and attention to de
 - `/leadership-brief` is a read-only Leadership Brief derived from `SYNTHETIC_INITIATIVES`. Existing `leadership_draft` suggestions are shown separately and are not the recorded brief.
 - `/initiatives/{id}/intake` is a read-only AI Workflow Intake. It loads the matching fixture record, evaluates deterministic intake completeness separately from readiness, and displays existing AI suggestions separately from recorded human data.
 - The root route includes a Demo Orientation & Data Guide above the existing fixture-driven Portfolio Dashboard.
+- Shared application navigation lives in `src/lib/components/AppNav.svelte`. Root and Leadership Brief show Overview / Portfolio / Leadership Brief. Initiative pages show Portfolio / Intake / Risk Pre-Check / Program Controls / Leadership Brief using the current initiative ID.
 - No further architecture decisions have been authorized.
 
 # Current Authorized Step
 
-Checkpointing Step 9 — Demo Orientation & Data Guide validated.
+Checkpointing Step 10 — Shared Application Navigation validated.
 
 # Completed and Validated Steps
 
@@ -87,7 +88,8 @@ Checkpointing Step 9 — Demo Orientation & Data Guide validated.
 - **Step 6 — Read-only PHI / PII Risk Pre-Check.** Completed, validated, committed, and pushed.
 - **Step 7 — Read-only Leadership Brief.** Completed, validated, committed, and pushed.
 - **Step 8 — Read-only AI Workflow Intake.** Completed, validated, committed, and pushed.
-- **Step 9 — Demo Orientation & Data Guide.** Completed and validated. Pending commit.
+- **Step 9 — Demo Orientation & Data Guide.** Completed, validated, committed, and pushed.
+- **Step 10 — Shared Application Navigation.** Completed and validated. Pending commit.
 
 # Validation Evidence
 
@@ -259,6 +261,20 @@ Step 9 independently validated. Confirmed:
 - `npm run build` passed successfully.
 - No dependencies, domain behavior, persistence, auth, workflow mutations, APIs, or state-management libraries were introduced.
 
+Step 10 independently validated. Confirmed:
+
+- Added shared navigation component: `src/lib/components/AppNav.svelte`.
+- Replaced page-specific navigation rows in: root page; Leadership Brief; Workflow Detail / Program Controls; AI Workflow Intake; PHI / PII Risk Pre-Check.
+- Root / Leadership navigation: Overview; Portfolio; Leadership Brief.
+- Initiative navigation: Portfolio; Intake; Risk Pre-Check; Program Controls; Leadership Brief.
+- Initiative-specific links preserve the current initiative ID.
+- Active state uses subtle styling plus `aria-current="page"`.
+- Runtime validation confirmed: root navigation renders expected links; Portfolio points to `/#portfolio-dashboard`; Clinical-note initiative navigation renders all five links; Intake and Risk Pre-Check preserve `syn-clinical-note-summarization`.
+- Existing page bodies and business behavior remain unchanged.
+- `npm run check` passed with 0 errors and 0 warnings.
+- `npm run build` passed successfully.
+- No dependencies, domain behavior, persistence, auth, workflow mutations, APIs, or state-management libraries were introduced.
+
 # Known-Good Checkpoints
 
 - **Checkpoint 0:** Step 0 repository governance and project-state documentation. Completed, validated, committed, and pushed.
@@ -297,16 +313,20 @@ Step 9 independently validated. Confirmed:
   - Commit: `836a90b`
   - Message: `Add validated read-only AI workflow intake`
   - Remote branch: `origin/main`
-- **Checkpoint 9 (pending commit):** Validated Demo Orientation & Data Guide. Pending authorized commit.
+- **Checkpoint 9:** Step 9 Demo Orientation & Data Guide. Completed, validated, committed, and pushed.
+  - Commit: `a8f1cb3`
+  - Message: `Add validated demo orientation and data guide`
+  - Remote branch: `origin/main`
+- **Checkpoint 10 (pending commit):** Validated Shared Application Navigation. Pending authorized commit.
 
 # Last Known-Good Checkpoint
 
-- **Checkpoint 8**
-- Commit: `836a90b`
-- Message: `Add validated read-only AI workflow intake`
+- **Checkpoint 9**
+- Commit: `a8f1cb3`
+- Message: `Add validated demo orientation and data guide`
 - Branch: `main`
 - Remote: `origin/main`
-- Local and remote synchronized.
+- Local and remote synchronized before the current uncommitted Step 10 work.
 
 # Current Validated Application State
 
@@ -348,7 +368,7 @@ None recorded.
 
 # Next Authorized Step
 
-Not yet authorized. Recommended next action: deploy Checkpoint 9 and validate the public Vercel routes.
+Not yet authorized. Recommended next action: deploy Checkpoint 10 and perform final public Vercel visual/route validation.
 
 # Resume From Here
 
@@ -360,7 +380,7 @@ git status -sb
 git log -3 --oneline
 ```
 
-Expected HEAD: `836a90b Add validated read-only AI workflow intake`
+Expected HEAD: `a8f1cb3 Add validated demo orientation and data guide`
 
 Re-read:
 
