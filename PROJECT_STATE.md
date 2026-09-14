@@ -44,7 +44,7 @@ The work should demonstrate competency, judgment, structure, and attention to de
 - A failed validation remains part of the current step until resolved.
 - Once validated, a step becomes a known-good checkpoint and should not be altered without explicit authorization.
 - Git commits represent validated known-good checkpoints.
-- The local working copy is the source of day-to-day work. Do not treat the empty GitHub remote as having project content until the first authorized commit is pushed.
+- The local working copy is the source of day-to-day work. The GitHub remote now has Checkpoint 0 on `origin/main`.
 - After an authorized commit, the GitHub remote must be updated so local and remote stay in sync.
 
 # Architecture Decisions
@@ -55,11 +55,11 @@ The work should demonstrate competency, judgment, structure, and attention to de
 
 # Current Authorized Step
 
-Checkpointing Step 0 — repository governance and project-state documentation validated.
+None. Step 0 is completed, validated, committed, and pushed. Awaiting next authorization.
 
 # Completed and Validated Steps
 
-- **Step 0 — Establish repository governance and project-state documentation.** Independently validated. Pending commit.
+- **Step 0 — Establish repository governance and project-state documentation.** Completed, validated, committed, and pushed.
 
 # Validation Evidence
 
@@ -91,7 +91,10 @@ git status --short
 
 # Known-Good Checkpoints
 
-- **Checkpoint 0 (pending commit):** Step 0 repository governance and project-state documentation. First known-good project-state checkpoint, pending authorized commit.
+- **Checkpoint 0:** Step 0 repository governance and project-state documentation. Completed, validated, committed, and pushed.
+  - Commit: `474ea3e5008aacc388b2a5b458c01856eea32d3d`
+  - Message: `Initialize project governance and state tracking`
+  - Remote branch: `origin/main`
 
 # Blockers
 
