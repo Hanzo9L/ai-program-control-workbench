@@ -30,6 +30,9 @@
 </svelte:head>
 
 <main class="page">
+	<p class="nav">
+		<a href="/leadership-brief">Leadership Brief</a>
+	</p>
 	<header class="header">
 		<h1>AI Program Control & Risk Workbench</h1>
 		<p class="subtitle">
@@ -127,6 +130,14 @@
 		max-width: 68rem;
 		margin: 0 auto;
 		padding: 2rem 1.25rem 3rem;
+	}
+
+	.nav {
+		margin: 0 0 1.25rem;
+	}
+
+	.nav a {
+		color: #1f4e46;
 	}
 
 	.header h1 {

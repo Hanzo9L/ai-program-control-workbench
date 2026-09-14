@@ -67,21 +67,23 @@ The work should demonstrate competency, judgment, structure, and attention to de
 - The root route renders a read-only Portfolio Dashboard from `SYNTHETIC_INITIATIVES`. No duplicate initiative data source.
 - Initiative names on the dashboard link to `/initiatives/{initiative.id}`. The detail route loads the matching fixture record; unknown IDs return SvelteKit 404.
 - `/initiatives/{id}/risk-precheck` is a read-only PHI / PII Risk Pre-Check. It loads the matching fixture record, separates recorded human classification from AI suggestions/indicators, and does not generate missing suggestions.
+- `/leadership-brief` is a read-only Leadership Brief derived from `SYNTHETIC_INITIATIVES`. Existing `leadership_draft` suggestions are shown separately and are not the recorded brief.
 - No further architecture decisions have been authorized.
 
 # Current Authorized Step
 
-Checkpointing Step 6 — read-only PHI / PII Risk Pre-Check validated.
+Checkpointing Step 7 — read-only Leadership Brief validated.
 
 # Completed and Validated Steps
 
 - **Step 0 — Establish repository governance and project-state documentation.** Completed, validated, committed, and pushed.
 - **Step 1 — Scaffold and validate the application baseline.** Completed, validated, committed, and pushed.
-- **Step 2 — Define the product shape and workflow/state model.** Completed and validated. Pending commit.
-- **Step 3 — Define typed domain model and synthetic fixture data.** Completed and validated. Pending commit.
-- **Step 4 — Read-only Portfolio Dashboard.** Completed and validated. Pending commit.
-- **Step 5 — Read-only Workflow Detail / Program Controls.** Completed and validated. Pending commit.
-- **Step 6 — Read-only PHI / PII Risk Pre-Check.** Completed and validated. Pending commit.
+- **Step 2 — Define the product shape and workflow/state model.** Completed, validated, committed, and pushed.
+- **Step 3 — Define typed domain model and synthetic fixture data.** Completed, validated, committed, and pushed.
+- **Step 4 — Read-only Portfolio Dashboard.** Completed, validated, committed, and pushed.
+- **Step 5 — Read-only Workflow Detail / Program Controls.** Completed, validated, committed, and pushed.
+- **Step 6 — Read-only PHI / PII Risk Pre-Check.** Completed, validated, committed, and pushed.
+- **Step 7 — Read-only Leadership Brief.** Completed and validated. Pending commit.
 
 # Validation Evidence
 
@@ -201,6 +203,23 @@ Step 6 independently validated. Confirmed:
 - `npm run build` passed successfully.
 - No dependencies, domain behavior, persistence, auth, AI execution, workflow transitions, APIs, or state-management libraries were introduced.
 
+Step 7 independently validated. Confirmed:
+
+- Added `src/routes/leadership-brief/+page.svelte`.
+- Portfolio Dashboard now links to `/leadership-brief`.
+- Leadership Brief derives all content directly from `SYNTHETIC_INITIATIVES`.
+- Runtime-validated counts: Total 5; Blocked 2; Ready for Approval 1; Approved for Launch 0; In Pilot 1.
+- Blocked section includes: Clinical-note summarization pilot; Patient outreach drafting assistant.
+- Unresolved dependencies include: Storage / tool approval; Data sensitivity review; Human accountability; Retention / residency review.
+- Draft / Intake Review Open gates are excluded from leadership-level blocker grouping by the validated stage-aware rule.
+- Owner/action items are derived only from recorded owners and Open gates.
+- Launch/readiness summary is deterministic and descriptive only.
+- Existing `leadership_draft` suggestions are displayed in a separate Existing AI-assisted draft snippets section and explicitly labeled as not the recorded leadership brief.
+- No recommendations, compliance claims, or new facts are generated.
+- `npm run check` passed with 0 errors and 0 warnings.
+- `npm run build` passed successfully.
+- No dependencies, domain behavior, persistence, auth, workflow transitions, API calls, or state-management libraries were introduced.
+
 # Known-Good Checkpoints
 
 - **Checkpoint 0:** Step 0 repository governance and project-state documentation. Completed, validated, committed, and pushed.
@@ -211,11 +230,27 @@ Step 6 independently validated. Confirmed:
   - Commit: `375a45d`
   - Message: `Establish validated SvelteKit baseline`
   - Remote branch: `origin/main`
-- **Checkpoint 2 (pending commit):** Validated product behavior specification. Pending authorized commit.
-- **Checkpoint 3 (pending commit):** Validated typed domain model and synthetic fixture dataset. Pending authorized commit.
-- **Checkpoint 4 (pending commit):** Validated read-only Portfolio Dashboard. Pending authorized commit.
-- **Checkpoint 5 (pending commit):** Validated read-only Workflow Detail / Program Controls screen. Pending authorized commit.
-- **Checkpoint 6 (pending commit):** Validated read-only PHI / PII Risk Pre-Check. Pending authorized commit.
+- **Checkpoint 2:** Step 2 product behavior specification. Completed, validated, committed, and pushed.
+  - Commit: `4dd32e1`
+  - Message: `Define validated product behavior specification`
+  - Remote branch: `origin/main`
+- **Checkpoint 3:** Step 3 typed domain model and synthetic fixture dataset. Completed, validated, committed, and pushed.
+  - Commit: `cfecc92`
+  - Message: `Establish validated domain model and fixtures`
+  - Remote branch: `origin/main`
+- **Checkpoint 4:** Step 4 read-only Portfolio Dashboard. Completed, validated, committed, and pushed.
+  - Commit: `e762add`
+  - Message: `Add validated read-only portfolio dashboard`
+  - Remote branch: `origin/main`
+- **Checkpoint 5:** Step 5 read-only Workflow Detail / Program Controls screen. Completed, validated, committed, and pushed.
+  - Commit: `71f0e7a`
+  - Message: `Add validated workflow detail screen`
+  - Remote branch: `origin/main`
+- **Checkpoint 6:** Step 6 read-only PHI / PII Risk Pre-Check. Completed, validated, committed, and pushed.
+  - Commit: `b0090ff`
+  - Message: `Add validated PHI PII risk pre-check`
+  - Remote branch: `origin/main`
+- **Checkpoint 7 (pending commit):** Validated read-only Leadership Brief. Pending authorized commit.
 
 # Blockers
 
