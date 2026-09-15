@@ -69,13 +69,13 @@ The work should demonstrate competency, judgment, structure, and attention to de
 - `/initiatives/{id}/risk-precheck` is a read-only PHI / PII Risk Pre-Check. It loads the matching fixture record, separates recorded human classification from AI suggestions/indicators, and does not generate missing suggestions.
 - `/leadership-brief` is a read-only Leadership Brief derived from `SYNTHETIC_INITIATIVES`. Existing `leadership_draft` suggestions are shown separately and are not the recorded brief.
 - `/initiatives/{id}/intake` is a read-only AI Workflow Intake. It loads the matching fixture record, evaluates deterministic intake completeness separately from readiness, and displays existing AI suggestions separately from recorded human data.
-- The root route includes a Demo Orientation & Data Guide above the existing fixture-driven Portfolio Dashboard. Demo Orientation includes Follow the process: representative snapshots of different lifecycle situations, not one initiative moving through time.
+- The root route includes a Demo Orientation & Data Guide above the existing fixture-driven Portfolio Dashboard. Demo Orientation includes Follow the process as a progressive four-stage process board: representative snapshots of different lifecycle situations, not one initiative moving through time.
 - Shared application navigation lives in `src/lib/components/AppNav.svelte`. Root and Leadership Brief show Overview / Portfolio / Leadership Brief. Initiative pages show Portfolio / Intake / Risk Pre-Check / Program Controls / Leadership Brief using the current initiative ID.
 - No further architecture decisions have been authorized.
 
 # Current Authorized Step
 
-Checkpointing Step 11 — Follow the Process / Human Checkpoint Guide validated.
+Checkpointing Step 12 — Progressive Follow-the-Process Board validated.
 
 # Completed and Validated Steps
 
@@ -91,6 +91,7 @@ Checkpointing Step 11 — Follow the Process / Human Checkpoint Guide validated.
 - **Step 9 — Demo Orientation & Data Guide.** Completed, validated, committed, and pushed.
 - **Step 10 — Shared Application Navigation.** Completed, validated, committed, and pushed.
 - **Step 11 — Follow the Process / Human Checkpoint Guide.** Completed and validated. Pending commit.
+- **Step 12 — Progressive Follow-the-Process Board.** Completed and validated. Pending commit.
 
 # Validation Evidence
 
@@ -290,6 +291,26 @@ Step 11 independently validated. Confirmed:
 - `npm run build` passed successfully.
 - No dependencies, domain behavior, persistence, auth, APIs, or state-management libraries were introduced.
 
+Step 12 independently validated. Confirmed:
+
+- Root Demo Orientation Follow the process is now a progressive, selectable four-stage process board rather than four simultaneously visible cards.
+- The board represents: 1 Draft / Intake → 2 Risk Review → 3 Ready for Approval → 4 In Pilot.
+- The guide explicitly states the synthetic initiatives are representative snapshots of different points in the process, not one initiative moving through time. The board represents the process; different synthetic initiatives demonstrate representative states within it.
+- Only one selected-stage detail is visible at a time. Each stage uses: Recorded state; System + AI; Human checkpoint; What happens next; Explore this stage; Continue for Stages 1–3.
+- Representative stages remain: Internal policy assistant — Draft / Clear, intake completeness 4 of 8; Clinical-note summarization pilot — Risk Review / Blocked, with Storage / tool approval and Data sensitivity review Open; Scheduling assistant — Ready for Approval / Clear; Claims-document triage pilot — In Pilot / Clear.
+- Progressive Continue unlocks later stages in the current page session; already-revealed stages are selectable without repeating the unlock sequence; reload resets to Stage 1; walkthrough state is not persisted.
+- Stage 4 has no fake next stage. A restrained completion message is shown. Navigation and Explore links remain usable during the walkthrough.
+- Process principle preserved: System determines what can be determined. AI assists where judgment-support is useful. Humans make accountable decisions.
+- No functional approvals, submissions, lifecycle transitions, or mutations were introduced.
+- Runtime validation confirmed: root HTTP 200; Follow the process and representative-snapshot boundary render; Stage 1 is the initial selected stage and the only initially visible detail; the process rail shows all four stage names; Continue exists for Stages 1–3; all four Explore routes and the Stage 2 Risk Pre-Check supporting route are correct.
+- Progressive interaction was exercised in the browser: Continue 1→2→3→4; backward/forward among revealed stages; reload reset; application navigation remained usable.
+- Portfolio Dashboard remains 5 / 2 / 1 / 1. All five synthetic initiatives remain rendered.
+- `npm run check` passed with 0 errors and 0 warnings.
+- `npm run build` passed successfully.
+- The complete Step 12 diff was audited before checkpointing. Verdict: SCOPE CLEAN. No unrelated changes were found.
+- Implementation changed only `src/routes/+page.svelte`.
+- No dependencies, domain behavior, persistence, auth, APIs, or state-management libraries were introduced.
+
 # Known-Good Checkpoints
 
 - **Checkpoint 0:** Step 0 repository governance and project-state documentation. Completed, validated, committed, and pushed.
@@ -337,6 +358,7 @@ Step 11 independently validated. Confirmed:
   - Message: `Add validated shared application navigation`
   - Remote branch: `origin/main`
 - **Checkpoint 11 (pending commit):** Validated Follow the Process / Human Checkpoint Guide. Pending authorized commit.
+- **Checkpoint 12 (pending commit):** Validated Progressive Follow-the-Process Board. Pending authorized commit. The complete Step 12 diff was audited before this recording; SCOPE CLEAN; no unrelated changes found.
 
 # Last Known-Good Checkpoint
 
@@ -366,6 +388,7 @@ Supporting validated foundations:
 - deterministic intake completeness
 - program-control gate model
 - human/AI authority boundaries
+- Demo Orientation Follow the process as a progressive four-stage process board
 - runtime validation for representative Clear, Blocked, incomplete-intake, leadership-summary, and 404 scenarios
 - synthetic data only
 - no persistence
@@ -387,7 +410,7 @@ None recorded.
 
 # Next Authorized Step
 
-Not yet authorized. Recommended next action: deploy Checkpoint 11 and visually review the public Vercel experience.
+Not yet authorized. Recommended next action: authorized commit of pending validated Steps 11–12, then deploy and visually review the public Vercel experience.
 
 # Resume From Here
 
