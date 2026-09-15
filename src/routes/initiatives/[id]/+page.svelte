@@ -1,5 +1,4 @@
 <script lang="ts">
-	import AppNav from '$lib/components/AppNav.svelte';
 	import type { Initiative } from '$lib/domain/types';
 
 	let { data }: { data: { initiative: Initiative } } = $props();
@@ -20,9 +19,7 @@
 	<title>{initiative.name} — AI Program Control & Risk Workbench</title>
 </svelte:head>
 
-<main class="page">
-	<AppNav initiativeId={initiative.id} active="program-controls" />
-
+<div class="initiative-view">
 	<header class="header">
 		<h1 data-initiative-name>{initiative.name}</h1>
 		<p class="meta">
@@ -110,6 +107,7 @@
 			These are recorded program-control statuses, not legal, regulatory, HIPAA, privacy, or security
 			determinations.
 		</p>
+		<div class="table-scroll">
 		<table>
 			<thead>
 				<tr>
@@ -140,6 +138,7 @@
 				{/each}
 			</tbody>
 		</table>
+		</div>
 	</section>
 
 	<section class="suggestions" aria-label="AI-assisted suggestions">
@@ -166,7 +165,7 @@
 		All data on this page is synthetic. This application does not determine legal, regulatory, HIPAA,
 		privacy, or security compliance.
 	</p>
-</main>
+</div>
 
 <style>
 	:global(body) {
@@ -180,10 +179,8 @@
 		line-height: 1.45;
 	}
 
-	.page {
-		max-width: 68rem;
-		margin: 0 auto;
-		padding: 2rem 1.25rem 3rem;
+	.initiative-view {
+		min-width: 0;
 	}
 
 	.header h1 {
@@ -279,6 +276,11 @@
 	table {
 		width: 100%;
 		border-collapse: collapse;
+	}
+
+	.table-scroll {
+		min-width: 0;
+		overflow-x: auto;
 	}
 
 	th,

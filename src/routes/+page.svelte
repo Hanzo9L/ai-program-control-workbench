@@ -1,5 +1,5 @@
 <script lang="ts">
-	import AppNav from '$lib/components/AppNav.svelte';
+	import WorkbenchShell from '$lib/components/WorkbenchShell.svelte';
 	import { SYNTHETIC_INITIATIVES } from '$lib/domain/fixtures';
 	import type { Initiative } from '$lib/domain/types';
 
@@ -30,9 +30,7 @@
 	<title>AI Program Control & Risk Workbench</title>
 </svelte:head>
 
-<main class="page">
-	<AppNav active="portfolio" />
-
+<WorkbenchShell>
 	<section id="portfolio-dashboard" class="dashboard" aria-label="Portfolio Dashboard">
 		<header class="header">
 			<h1>Portfolio Dashboard</h1>
@@ -62,6 +60,7 @@
 		</section>
 
 		<section aria-label="Initiative list">
+			<div class="table-scroll">
 			<table>
 				<caption>Synthetic initiative portfolio</caption>
 				<thead>
@@ -110,6 +109,7 @@
 					{/each}
 				</tbody>
 			</table>
+			</div>
 		</section>
 
 		<p class="disclaimer" role="note">
@@ -117,7 +117,7 @@
 			HIPAA, privacy, or security compliance.
 		</p>
 	</section>
-</main>
+</WorkbenchShell>
 
 <style>
 	:global(body) {
@@ -129,12 +129,6 @@
 			system-ui,
 			sans-serif;
 		line-height: 1.45;
-	}
-
-	.page {
-		max-width: 68rem;
-		margin: 0 auto;
-		padding: 2rem 1.25rem 3rem;
 	}
 
 	th a {
@@ -154,7 +148,13 @@
 	}
 
 	.dashboard {
+		min-width: 0;
 		scroll-margin-top: 1rem;
+	}
+
+	.table-scroll {
+		min-width: 0;
+		overflow-x: auto;
 	}
 
 	.summary {
