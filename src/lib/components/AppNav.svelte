@@ -1,15 +1,15 @@
 <script lang="ts">
 	type NavActive =
-		| 'overview'
 		| 'portfolio'
 		| 'leadership'
+		| 'guide'
 		| 'intake'
 		| 'risk-precheck'
 		| 'program-controls';
 
 	let {
 		initiativeId = null,
-		active = 'overview'
+		active = 'portfolio'
 	}: {
 		initiativeId?: string | null;
 		active?: NavActive;
@@ -52,17 +52,13 @@
 			aria-current={current('leadership')}>Leadership Brief</a
 		>
 	{:else}
-		<a href="/" class:active={isActive('overview')} aria-current={current('overview')}>Overview</a>
-		<a
-			href="/#portfolio-dashboard"
-			class:active={isActive('portfolio')}
-			aria-current={current('portfolio')}>Portfolio</a
-		>
+		<a href="/" class:active={isActive('portfolio')} aria-current={current('portfolio')}>Portfolio</a>
 		<a
 			href="/leadership-brief"
 			class:active={isActive('leadership')}
 			aria-current={current('leadership')}>Leadership Brief</a
 		>
+		<a href="/guide" class:active={isActive('guide')} aria-current={current('guide')}>Guide</a>
 	{/if}
 </nav>
 
