@@ -69,13 +69,13 @@ The work should demonstrate competency, judgment, structure, and attention to de
 - `/initiatives/{id}/risk-precheck` is a read-only PHI / PII Risk Pre-Check. It loads the matching fixture record, separates recorded human classification from AI suggestions/indicators, and does not generate missing suggestions.
 - `/leadership-brief` is a read-only Leadership Brief derived from `SYNTHETIC_INITIATIVES`. Existing `leadership_draft` suggestions are shown separately and are not the recorded brief.
 - `/initiatives/{id}/intake` is a read-only AI Workflow Intake. It loads the matching fixture record, evaluates deterministic intake completeness separately from readiness, and displays existing AI suggestions separately from recorded human data.
-- The root route includes a Demo Orientation & Data Guide above the existing fixture-driven Portfolio Dashboard.
+- The root route includes a Demo Orientation & Data Guide above the existing fixture-driven Portfolio Dashboard. Demo Orientation includes Follow the process: representative snapshots of different lifecycle situations, not one initiative moving through time.
 - Shared application navigation lives in `src/lib/components/AppNav.svelte`. Root and Leadership Brief show Overview / Portfolio / Leadership Brief. Initiative pages show Portfolio / Intake / Risk Pre-Check / Program Controls / Leadership Brief using the current initiative ID.
 - No further architecture decisions have been authorized.
 
 # Current Authorized Step
 
-PAUSED — Checkpoint 10 is the last known-good state. Application navigation and demo orientation validated.
+Checkpointing Step 11 — Follow the Process / Human Checkpoint Guide validated.
 
 # Completed and Validated Steps
 
@@ -90,6 +90,7 @@ PAUSED — Checkpoint 10 is the last known-good state. Application navigation an
 - **Step 8 — Read-only AI Workflow Intake.** Completed, validated, committed, and pushed.
 - **Step 9 — Demo Orientation & Data Guide.** Completed, validated, committed, and pushed.
 - **Step 10 — Shared Application Navigation.** Completed, validated, committed, and pushed.
+- **Step 11 — Follow the Process / Human Checkpoint Guide.** Completed and validated. Pending commit.
 
 # Validation Evidence
 
@@ -275,6 +276,20 @@ Step 10 independently validated. Confirmed:
 - `npm run build` passed successfully.
 - No dependencies, domain behavior, persistence, auth, workflow mutations, APIs, or state-management libraries were introduced.
 
+Step 11 independently validated. Confirmed:
+
+- Root Demo Orientation now includes Follow the process.
+- The guide explicitly states the synthetic initiatives are representative snapshots of different points in the process, not one initiative moving through time.
+- Four representative stages are shown: Internal policy assistant — Draft / Clear, intake completeness 4 of 8; Clinical-note summarization pilot — Risk Review / Blocked, with Storage / tool approval and Data sensitivity review Open; Scheduling assistant — Ready for Approval / Clear; Claims-document triage pilot — In Pilot / Clear.
+- Each stage explains: What this represents; System / deterministic behavior; AI assistance; Human checkpoint; What happens next; Follow this step.
+- Guide preserves the distinction between system determination, AI assistance, and accountable human decisions.
+- No functional approvals, submissions, lifecycle transitions, or mutations were introduced.
+- Runtime validation confirmed four Human checkpoints, four What happens next sections, all four representative examples and process links.
+- Portfolio Dashboard remains 5 / 2 / 1 / 1.
+- `npm run check` passed with 0 errors and 0 warnings.
+- `npm run build` passed successfully.
+- No dependencies, domain behavior, persistence, auth, APIs, or state-management libraries were introduced.
+
 # Known-Good Checkpoints
 
 - **Checkpoint 0:** Step 0 repository governance and project-state documentation. Completed, validated, committed, and pushed.
@@ -321,6 +336,7 @@ Step 10 independently validated. Confirmed:
   - Commit: `6519222`
   - Message: `Add validated shared application navigation`
   - Remote branch: `origin/main`
+- **Checkpoint 11 (pending commit):** Validated Follow the Process / Human Checkpoint Guide. Pending authorized commit.
 
 # Last Known-Good Checkpoint
 
@@ -371,7 +387,7 @@ None recorded.
 
 # Next Authorized Step
 
-Not yet authorized. Recommended next action: final public Vercel visual/route validation only.
+Not yet authorized. Recommended next action: deploy Checkpoint 11 and visually review the public Vercel experience.
 
 # Resume From Here
 

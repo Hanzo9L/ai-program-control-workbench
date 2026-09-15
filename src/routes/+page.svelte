@@ -186,6 +186,222 @@
 			</p>
 		</section>
 
+		<section class="panel" aria-label="Follow the process">
+			<h2>Follow the process</h2>
+			<p>
+				These synthetic initiatives are representative snapshots of different points in the
+				process, not one initiative moving through time. Follow them to see what the system can
+				determine, where AI can assist, where a human decision is required, and what would happen
+				next.
+			</p>
+			<ol class="process-stages">
+				<li class="process-card">
+					<p class="process-stage">Stage 1 — Draft / Intake</p>
+					<p class="process-example">
+						Representative example:
+						<a href="/initiatives/syn-internal-policy-assistant/intake">Internal policy assistant</a>
+					</p>
+					<p class="process-state">
+						Lifecycle: Draft · Readiness: Clear · Intake completeness: 4 of 8
+					</p>
+					<dl>
+						<div>
+							<dt>What this represents</dt>
+							<dd>An emerging AI idea is being structured into a reviewable initiative.</dd>
+						</div>
+						<div>
+							<dt>System / deterministic</dt>
+							<dd>
+								The intake completeness rule identifies four required fields as incomplete.
+							</dd>
+						</div>
+						<div>
+							<dt>AI assistance</dt>
+							<dd>
+								Existing fixture-based AI suggestions can summarize the intake, suggest
+								preliminary classification, and surface possible missing information.
+							</dd>
+						</div>
+						<div>
+							<dt>Human checkpoint</dt>
+							<dd>
+								A human completes/validates the required intake information and explicitly
+								decides when to submit the initiative for Intake Review.
+							</dd>
+						</div>
+						<div>
+							<dt>What happens next</dt>
+							<dd>
+								Completing all required fields may make the initiative eligible for submission,
+								but it does not auto-submit or change lifecycle.
+							</dd>
+						</div>
+					</dl>
+					<p class="process-follow">
+						<a href="/initiatives/syn-internal-policy-assistant/intake">Follow this step →</a>
+					</p>
+				</li>
+				<li class="process-card">
+					<p class="process-stage">Stage 2 — Risk Review / unresolved controls</p>
+					<p class="process-example">
+						Representative example:
+						<a href="/initiatives/syn-clinical-note-summarization"
+							>Clinical-note summarization pilot</a
+						>
+					</p>
+					<p class="process-state">
+						Lifecycle: Risk Review · Readiness: Blocked · Open controls: Storage / tool approval;
+						Data sensitivity review
+					</p>
+					<dl>
+						<div>
+							<dt>What this represents</dt>
+							<dd>
+								The initiative has reached a stage where unresolved required program controls
+								prevent progression.
+							</dd>
+						</div>
+						<div>
+							<dt>System / deterministic</dt>
+							<dd>
+								At Risk Review or later, required Open controls result in Blocked readiness.
+							</dd>
+						</div>
+						<div>
+							<dt>AI assistance</dt>
+							<dd>
+								Existing fixture-based AI content may surface possible sensitivity/risk
+								indicators and preliminary classification suggestions for human review.
+							</dd>
+						</div>
+						<div>
+							<dt>Human checkpoint</dt>
+							<dd>
+								Appropriate human owners/reviewers resolve the organizational dependencies and
+								record the resulting control statuses. AI cannot satisfy a control.
+							</dd>
+						</div>
+						<div>
+							<dt>What happens next</dt>
+							<dd>
+								When no required applicable controls remain Open, readiness becomes Clear.
+								Lifecycle still does not advance automatically.
+							</dd>
+						</div>
+					</dl>
+					<p class="process-follow">
+						<a href="/initiatives/syn-clinical-note-summarization">Follow this step →</a>
+					</p>
+					<p class="process-support">
+						Supporting context:
+						<a href="/initiatives/syn-clinical-note-summarization/risk-precheck"
+							>PHI / PII Risk Pre-Check</a
+						>
+					</p>
+				</li>
+				<li class="process-card">
+					<p class="process-stage">Stage 3 — Ready for Approval</p>
+					<p class="process-example">
+						Representative example:
+						<a href="/initiatives/syn-scheduling-assistant">Scheduling assistant</a>
+					</p>
+					<p class="process-state">
+						Lifecycle: Ready for Approval · Readiness: Clear · no required Open controls
+					</p>
+					<dl>
+						<div>
+							<dt>What this represents</dt>
+							<dd>
+								Required program controls are resolved for the demonstrated model and the
+								initiative is waiting for an accountable approval decision.
+							</dd>
+						</div>
+						<div>
+							<dt>System / deterministic</dt>
+							<dd>
+								The system can determine that no required Open controls currently prevent
+								progression. It cannot determine that launch is approved.
+							</dd>
+						</div>
+						<div>
+							<dt>AI assistance</dt>
+							<dd>
+								Existing fixture-based AI content may summarize recorded information or draft
+								leadership language.
+							</dd>
+						</div>
+						<div>
+							<dt>Human checkpoint</dt>
+							<dd>An accountable human makes the launch/progression decision.</dd>
+						</div>
+						<div>
+							<dt>What happens next</dt>
+							<dd>
+								A human approval could move the initiative to Approved for Launch. No automatic
+								approval occurs.
+							</dd>
+						</div>
+					</dl>
+					<p class="process-follow">
+						<a href="/initiatives/syn-scheduling-assistant">Follow this step →</a>
+					</p>
+				</li>
+				<li class="process-card">
+					<p class="process-stage">Stage 4 — In Pilot</p>
+					<p class="process-example">
+						Representative example:
+						<a href="/initiatives/syn-claims-document-triage">Claims-document triage pilot</a>
+					</p>
+					<p class="process-state">Lifecycle: In Pilot · Readiness: Clear</p>
+					<dl>
+						<div>
+							<dt>What this represents</dt>
+							<dd>
+								A synthetic initiative has passed earlier decision points and is represented in a
+								controlled pilot stage.
+							</dd>
+						</div>
+						<div>
+							<dt>System / deterministic</dt>
+							<dd>
+								The application records lifecycle/readiness and the existing control record. This
+								proof-of-work does not invent operational pilot metrics.
+							</dd>
+						</div>
+						<div>
+							<dt>AI assistance</dt>
+							<dd>
+								Existing fixture-based AI content may support summaries/drafts only as already
+								recorded. This is not live operational AI monitoring.
+							</dd>
+						</div>
+						<div>
+							<dt>Human checkpoint</dt>
+							<dd>
+								Humans remain accountable for pilot oversight, consequential decisions, and
+								eventual lifecycle closure.
+							</dd>
+						</div>
+						<div>
+							<dt>What happens next</dt>
+							<dd>
+								In a real program, pilot evidence would inform the accountable decision about
+								continuation, change, rollout, or closure. Those capabilities are not implemented
+								in this proof-of-work.
+							</dd>
+						</div>
+					</dl>
+					<p class="process-follow">
+						<a href="/initiatives/syn-claims-document-triage">Follow this step →</a>
+					</p>
+				</li>
+			</ol>
+			<p class="principle">
+				System determines what can be determined. AI assists where judgment-support is useful.
+				Humans make accountable decisions.
+			</p>
+		</section>
+
 		<section class="panel" aria-label="Explore the demonstration">
 			<h2>Explore the demonstration</h2>
 			<ul class="explore-list">
@@ -492,6 +708,62 @@
 	.principle {
 		margin: 0;
 		color: #4b5563;
+	}
+
+	.process-stages {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+		gap: 0.75rem;
+		margin: 0.85rem 0 0.75rem;
+		padding: 0;
+		list-style: none;
+		counter-reset: none;
+	}
+
+	.process-card {
+		padding: 0.75rem 0.85rem;
+		background: #f7f6f3;
+		border: 1px solid #e6e3db;
+	}
+
+	.process-stage {
+		margin: 0 0 0.35rem;
+		font-weight: 650;
+		font-size: 0.95rem;
+	}
+
+	.process-example,
+	.process-state,
+	.process-follow,
+	.process-support {
+		margin: 0 0 0.55rem;
+		font-size: 0.9rem;
+	}
+
+	.process-state,
+	.process-support {
+		color: #4b5563;
+	}
+
+	.process-card dl {
+		margin: 0 0 0.55rem;
+	}
+
+	.process-card dl div {
+		margin: 0 0 0.5rem;
+	}
+
+	.process-card dl div:last-child {
+		margin-bottom: 0;
+	}
+
+	.process-follow {
+		margin: 0;
+	}
+
+	.process-support {
+		margin: 0.4rem 0 0;
+		font-size: 0.85rem;
 	}
 
 	.explore-list li + li {
