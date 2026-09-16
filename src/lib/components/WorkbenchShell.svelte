@@ -17,6 +17,22 @@
 		return 'program-controls';
 	});
 
+	let expandedIds = $state(new Set<string>(page.params.id ? [page.params.id] : []));
+
+	function isExpanded(initiativeId: string) {
+		return expandedIds.has(initiativeId);
+	}
+
+	function toggleExpanded(initiativeId: string) {
+		const next = new Set(expandedIds);
+		if (next.has(initiativeId)) {
+			next.delete(initiativeId);
+		} else {
+			next.add(initiativeId);
+		}
+		expandedIds = next;
+	}
+
 	function childHref(initiativeId: string, child: ChildView) {
 		if (child === 'intake') return `/initiatives/${initiativeId}/intake`;
 		if (child === 'risk-precheck') return `/initiatives/${initiativeId}/risk-precheck`;
@@ -34,26 +50,37 @@
 			</p>
 			<ul class="tree-list">
 				{#each SYNTHETIC_INITIATIVES as initiative (initiative.id)}
-					{@const expanded = initiative.id === currentId}
+					{@const expanded = isExpanded(initiative.id)}
+					{@const selected = initiative.id === currentId}
 					<li
 						class="tree-initiative"
-						class:tree-initiative-current={expanded}
+						class:tree-initiative-current={selected}
 						data-tree-initiative={initiative.id}
 						data-tree-state={expanded ? 'expanded' : 'collapsed'}
 					>
-						<a class="tree-initiative-link" href="/initiatives/{initiative.id}">
-							<span class="tree-chevron" aria-hidden="true">{expanded ? '▼' : '▶'}</span>
-							<span class="tree-initiative-name">{initiative.name}</span>
-						</a>
+						<div class="tree-initiative-row">
+							<button
+								type="button"
+								class="tree-disclosure"
+								aria-expanded={expanded}
+								aria-label={expanded ? `Collapse ${initiative.name}` : `Expand ${initiative.name}`}
+								onclick={() => toggleExpanded(initiative.id)}
+							>
+								<span class="tree-chevron" aria-hidden="true">{expanded ? '▼' : '▶'}</span>
+							</button>
+							<a class="tree-initiative-link" href="/initiatives/{initiative.id}">
+								<span class="tree-initiative-name">{initiative.name}</span>
+							</a>
+						</div>
 						{#if expanded}
 							<ul class="tree-children">
 								<li>
 									<a
 										href={childHref(initiative.id, 'intake')}
 										class="tree-child"
-										class:tree-child-current={currentChild === 'intake'}
+										class:tree-child-current={selected && currentChild === 'intake'}
 										data-tree-child="intake"
-										aria-current={currentChild === 'intake' ? 'page' : undefined}
+										aria-current={selected && currentChild === 'intake' ? 'page' : undefined}
 									>
 										Intake
 									</a>
@@ -62,9 +89,9 @@
 									<a
 										href={childHref(initiative.id, 'risk-precheck')}
 										class="tree-child"
-										class:tree-child-current={currentChild === 'risk-precheck'}
+										class:tree-child-current={selected && currentChild === 'risk-precheck'}
 										data-tree-child="risk-precheck"
-										aria-current={currentChild === 'risk-precheck' ? 'page' : undefined}
+										aria-current={selected && currentChild === 'risk-precheck' ? 'page' : undefined}
 									>
 										Risk Pre-Check
 									</a>
@@ -73,9 +100,9 @@
 									<a
 										href={childHref(initiative.id, 'program-controls')}
 										class="tree-child"
-										class:tree-child-current={currentChild === 'program-controls'}
+										class:tree-child-current={selected && currentChild === 'program-controls'}
 										data-tree-child="program-controls"
-										aria-current={currentChild === 'program-controls' ? 'page' : undefined}
+										aria-current={selected && currentChild === 'program-controls' ? 'page' : undefined}
 									>
 										Program Controls
 									</a>
@@ -147,11 +174,38 @@
 		margin: 0 0 0.2rem;
 	}
 
+	.tree-initiative-row {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.1rem;
+		min-width: 0;
+	}
+
+	.tree-disclosure {
+		flex: 0 0 auto;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		margin: 0;
+		padding: 0.28rem 0.2rem;
+		border: 0;
+		border-radius: 0.25rem;
+		background: transparent;
+		color: #5c6570;
+		cursor: pointer;
+		font: inherit;
+		line-height: 1.3;
+	}
+
+	.tree-disclosure:hover {
+		background: #eceae4;
+	}
+
 	.tree-initiative-link,
 	.tree-child {
 		display: flex;
 		align-items: flex-start;
-		gap: 0.35rem;
+		min-width: 0;
 		padding: 0.28rem 0.4rem;
 		border-radius: 0.25rem;
 		color: #243040;
@@ -160,21 +214,24 @@
 		line-height: 1.3;
 	}
 
+	.tree-initiative-link {
+		flex: 1 1 auto;
+	}
+
 	.tree-initiative-link:hover,
 	.tree-child:hover {
 		background: #eceae4;
 	}
 
-	.tree-initiative-current > .tree-initiative-link {
+	.tree-initiative-current .tree-initiative-link {
 		font-weight: 650;
 		background: #eef3f1;
 		color: #1f4e46;
 	}
 
 	.tree-chevron {
-		flex: 0 0 auto;
+		display: block;
 		width: 0.9rem;
-		color: #5c6570;
 		font-size: 0.7rem;
 		line-height: 1.45;
 	}
@@ -203,7 +260,8 @@
 
 	.tree-initiative-link:focus-visible,
 	.tree-child:focus-visible,
-	.tree-root:focus-visible {
+	.tree-root:focus-visible,
+	.tree-disclosure:focus-visible {
 		outline: 2px solid #1f4e46;
 		outline-offset: 2px;
 	}
