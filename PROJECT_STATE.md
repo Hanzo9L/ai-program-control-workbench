@@ -69,13 +69,20 @@ The work should demonstrate competency, judgment, structure, and attention to de
 - `/initiatives/{id}/risk-precheck` is a read-only PHI / PII Risk Pre-Check. It loads the matching fixture record, separates recorded human classification from AI suggestions/indicators, and does not generate missing suggestions.
 - `/leadership-brief` is a read-only Leadership Brief derived from `SYNTHETIC_INITIATIVES`. Existing `leadership_draft` suggestions are shown separately and are not the recorded brief.
 - `/initiatives/{id}/intake` is a read-only AI Workflow Intake. It loads the matching fixture record, evaluates deterministic intake completeness separately from readiness, and displays existing AI suggestions separately from recorded human data.
-- The root route includes a Demo Orientation & Data Guide above the existing fixture-driven Portfolio Dashboard. Demo Orientation includes Follow the process as a progressive four-stage process board: representative snapshots of different lifecycle situations, not one initiative moving through time.
-- Shared application navigation lives in `src/lib/components/AppNav.svelte`. Root and Leadership Brief show Overview / Portfolio / Leadership Brief. Initiative pages show Portfolio / Intake / Risk Pre-Check / Program Controls / Leadership Brief using the current initiative ID.
+- The root route historically included a Demo Orientation & Data Guide above the Portfolio Dashboard, including Follow the process as a progressive four-stage process board (representative snapshots, not one initiative moving through time). On `workbench-shell`, that educational material lives at `/guide`; `/` is Portfolio-only.
+- Shared application navigation lives in `src/lib/components/AppNav.svelte`.
+- On `workbench-shell`, global destinations are Portfolio / Leadership Brief / Guide. Portfolio is the front door (`/`). Full educational/orientation material, including the progressive process board, lives at `/guide`.
+- On `workbench-shell`, a persistent Workbench Shell applies to Portfolio and initiative routes only (`/`, `/initiatives/{id}`, `/initiatives/{id}/intake`, `/initiatives/{id}/risk-precheck`). `/guide` and `/leadership-brief` do not render the initiative tree.
+- Desktop: initiative hierarchy + workspace. Narrow widths: hierarchy stacked above workspace. Public initiative URLs are unchanged. The SvelteKit URL remains authoritative for selected initiative and selected child workspace.
+- Initiative child views are Intake / Risk Pre-Check / Program Controls. `/initiatives/{id}` remains Program Controls; no Overview screen was introduced.
+- Production / `main` / `origin/main` have not been replaced by `workbench-shell`.
 - No further architecture decisions have been authorized.
 
 # Current Authorized Step
 
-Checkpointing Step 12 — Progressive Follow-the-Process Board validated.
+ACCEPTED — `workbench-shell` at `a609247` is the approved production candidate.
+
+No Phase C. No additional feature work authorized. Do not alter the accepted application during merge preparation.
 
 # Completed and Validated Steps
 
@@ -362,43 +369,101 @@ Step 12 independently validated. Confirmed:
 
 # Last Known-Good Checkpoint
 
-- **Checkpoint 10**
-- Commit: `6519222`
-- Message: `Add validated shared application navigation`
+Production / `main` / `origin/main`:
+
+- Commit: `c1ad370`
+- Message: `Add validated progressive process board`
 - Branch: `main`
 - Remote: `origin/main`
-- Local and remote synchronized.
+
+`workbench-shell` at `a609247` is the accepted production candidate. It has not been merged. Production has not been replaced.
 
 # Current Validated Application State
 
-The complete five-screen read-only product shape is implemented and validated:
+The complete five-screen read-only product shape remains implemented.
 
-- Portfolio Dashboard
-- AI Workflow Intake
-- PHI / PII Risk Pre-Check
-- Workflow Detail / Program Controls
-- Leadership Brief
+**Production (`main` / `origin/main` at `c1ad370`):** not yet replaced by `workbench-shell`.
 
-Supporting validated foundations:
+**Accepted `workbench-shell` architecture (`a609247`, visually accepted, not yet merged):**
+
+- Portfolio is the application front door (`/`).
+- Educational/orientation content moved to `/guide`.
+- Global destinations: Portfolio / Leadership Brief / Guide.
+- Persistent Workbench Shell on Portfolio and initiative routes.
+- Desktop: initiative hierarchy + workspace.
+- Responsive narrow-width hierarchy above workspace.
+- Existing public initiative URLs preserved.
+- `/initiatives/{id}` remains Program Controls.
+- Initiative child views: Intake / Risk Pre-Check / Program Controls.
+- URL remains authoritative for selected initiative, selected child, and workspace content.
+- Initiative-tree disclosure is independent ephemeral UI state.
+- Disclosure buttons expand/collapse without navigation.
+- Multiple initiative branches may remain expanded.
+- Selected initiative may be collapsed without changing workspace.
+- Initiative name navigates/selects the initiative.
+- Full reload initializes the URL-selected initiative expanded; `/` initializes all collapsed.
+- No disclosure persistence was introduced.
+- Portfolio triage presentation is stage-aware without changing domain semantics.
+- Draft / Intake Review Open gates remain recorded but are presented as not currently blocking.
+- Risk Review-or-later applicable Open gates are presented as requiring resolution.
+- Leadership Brief consolidates unresolved actionable work into one Needs attention table.
+- Narrow-width table overflow is contained locally rather than causing body-level overflow.
+
+Domain freeze preserved. The accepted redesign did not change:
+
+- lifecycle states
+- Readiness = `Blocked` | `Clear`
+- gate statuses `Open` | `Satisfied` | `Not Applicable`
+- fixture values
+- stage-aware readiness semantics
+- deterministic intake completeness
+- AI/human authority boundaries
+- synthetic-data/compliance boundaries
+
+Supporting validated foundations (unchanged):
 
 - SvelteKit / TypeScript / Node.js baseline
 - typed domain model
 - five synthetic initiative fixtures
-- deterministic stage-aware readiness
-- deterministic intake completeness
-- program-control gate model
-- human/AI authority boundaries
-- Demo Orientation Follow the process as a progressive four-stage process board
-- runtime validation for representative Clear, Blocked, incomplete-intake, leadership-summary, and 404 scenarios
 - synthetic data only
 - no persistence
 - no authentication
 - no live AI/API integration
 - no workflow mutations
+- No Phase C cleanup was performed
+
+# Accepted branch checkpoints
+
+- `9b3c78a` — Make portfolio the workbench front door
+- `d7a4e12` — Add persistent portfolio workbench shell
+- `9a5fa33` — Improve portfolio and leadership triage clarity
+- `a71f2ae` — Record workbench shell stopping point
+- `a609247` — Decouple initiative selection and disclosure
+
+# Validation / acceptance
+
+- Phase A independently validated.
+- Phase B independently validated.
+- Narrow-width overflow correction validated.
+- Portfolio/Leadership triage clarity validated.
+- Independent tree-disclosure validation passed.
+- `npm run check` passed with 0 errors and 0 warnings at each final implementation gate.
+- `npm run build` passed at each final implementation gate.
+- Vercel branch Preview for `workbench-shell` / `a609247` was visually reviewed by the product owner.
+- Final disclosure behavior performs as intended.
+- Preview accepted.
+
+# Preview finding / unresolved UX issue
+
+None remaining. The prior initiative-tree expansion/selection coupling was corrected at `a609247` and accepted.
 
 # Stopping-Point Rule
 
-No implementation work is currently authorized.
+ACCEPTED — `workbench-shell` at `a609247` is the approved production candidate.
+
+- No Phase C.
+- No additional feature work authorized.
+- Do not alter the accepted application during merge preparation.
 
 # Blockers
 
@@ -410,19 +475,34 @@ None recorded.
 
 # Next Authorized Step
 
-Not yet authorized. Recommended next action: authorized commit of pending validated Steps 11–12, then deploy and visually review the public Vercel experience.
+Merge accepted `workbench-shell` into `main`, push `main`, verify successful Vercel production deployment at the existing production URL, then record the final production checkpoint.
+
+No Phase C. No additional feature work authorized. Do not alter the accepted application during merge preparation.
 
 # Resume From Here
 
-Begin by verifying:
+Begin on branch `workbench-shell`. Verify:
 
 ```
 git status --short
 git status -sb
-git log -3 --oneline
+git branch --show-current
+git log -5 --oneline
 ```
 
-Expected HEAD: `6519222 Add validated shared application navigation`
+Expected branch: `workbench-shell`
+
+Expected accepted HEAD: `a609247` Decouple initiative selection and disclosure
+
+Accepted branch checkpoints:
+
+- `9b3c78a` Make portfolio the workbench front door
+- `d7a4e12` Add persistent portfolio workbench shell
+- `9a5fa33` Improve portfolio and leadership triage clarity
+- `a71f2ae` Record workbench shell stopping point
+- `a609247` Decouple initiative selection and disclosure
+
+Expected `main` / `origin/main` until merge: `c1ad370` Add validated progressive process board
 
 Re-read:
 
@@ -430,11 +510,6 @@ Re-read:
 - `CLAUDE.md`
 - `PRODUCT_SPEC.md`
 
-Do not begin feature work until a new step is explicitly authorized.
+Next authorized action: merge accepted `workbench-shell` into `main`, push `main`, verify successful Vercel production deployment at the existing production URL, then record the final production checkpoint.
 
-Recommended next work:
-
-- README/demo documentation
-- Vercel deployment/configuration
-- final visual/demo review
-- only then decide whether any mutation behavior is necessary
+No Phase C. No additional feature work authorized. Do not alter the accepted application during merge preparation.

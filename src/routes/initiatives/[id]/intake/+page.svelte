@@ -1,5 +1,4 @@
 <script lang="ts">
-	import AppNav from '$lib/components/AppNav.svelte';
 	import { PRE_RISK_REVIEW_STATES } from '$lib/domain/constants';
 	import type { Initiative } from '$lib/domain/types';
 
@@ -78,9 +77,7 @@
 	<title>AI Workflow Intake — {initiative.name}</title>
 </svelte:head>
 
-<main class="page">
-	<AppNav initiativeId={initiative.id} active="intake" />
-
+<div class="initiative-view">
 	<header class="header">
 		<p class="eyebrow">AI Workflow Intake</p>
 		<h1 data-initiative-name>{initiative.name}</h1>
@@ -263,7 +260,7 @@
 		All data on this page is synthetic. This screen structures intake for program review. It does
 		not determine legal, regulatory, HIPAA, privacy, or security compliance.
 	</p>
-</main>
+</div>
 
 <style>
 	:global(body) {
@@ -275,12 +272,6 @@
 			system-ui,
 			sans-serif;
 		line-height: 1.45;
-	}
-
-	.page {
-		max-width: 68rem;
-		margin: 0 auto;
-		padding: 2rem 1.25rem 3rem;
 	}
 
 	.eyebrow {

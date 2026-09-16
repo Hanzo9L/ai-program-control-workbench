@@ -1,5 +1,4 @@
 <script lang="ts">
-	import AppNav from '$lib/components/AppNav.svelte';
 	import { PRE_RISK_REVIEW_STATES } from '$lib/domain/constants';
 	import type { Initiative } from '$lib/domain/types';
 
@@ -30,9 +29,7 @@
 	<title>PHI / PII Risk Pre-Check — {initiative.name}</title>
 </svelte:head>
 
-<main class="page">
-	<AppNav initiativeId={initiative.id} active="risk-precheck" />
-
+<div class="initiative-view">
 	<header class="header">
 		<p class="eyebrow">PHI / PII Risk Pre-Check</p>
 		<h1 data-initiative-name>{initiative.name}</h1>
@@ -184,7 +181,7 @@
 		All data on this page is synthetic. This screen is a PHI / PII Risk Pre-Check, not a compliance
 		checker. It does not determine legal, regulatory, HIPAA, privacy, or security compliance.
 	</p>
-</main>
+</div>
 
 <style>
 	:global(body) {
@@ -196,12 +193,6 @@
 			system-ui,
 			sans-serif;
 		line-height: 1.45;
-	}
-
-	.page {
-		max-width: 68rem;
-		margin: 0 auto;
-		padding: 2rem 1.25rem 3rem;
 	}
 
 	.eyebrow {

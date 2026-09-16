@@ -1,27 +1,17 @@
 <script lang="ts">
 	import AppNav from '$lib/components/AppNav.svelte';
-	import { LIFECYCLE_STATES, PRE_RISK_REVIEW_STATES } from '$lib/domain/constants';
+	import { LIFECYCLE_STATES } from '$lib/domain/constants';
 	import { SYNTHETIC_INITIATIVES } from '$lib/domain/fixtures';
-	import type { Gate, Initiative, LifecycleState } from '$lib/domain/types';
+	import { applicableRequiredOpenGates, isPreRiskReview } from '$lib/domain/validation';
 
 	const initiatives = SYNTHETIC_INITIATIVES;
-	const preRiskReview = new Set<string>(PRE_RISK_REVIEW_STATES);
 
 	function ownerLabel(owner: string | null) {
 		return owner ?? 'Not named';
 	}
 
-	function requiredOpenGates(initiative: Initiative): Gate[] {
-		return initiative.gates.filter((gate) => gate.status === 'Open');
-	}
-
-	function isRiskReviewOrLater(state: LifecycleState) {
-		return !preRiskReview.has(state);
-	}
-
 	const totalCount = initiatives.length;
-	const blockedInitiatives = initiatives.filter((initiative) => initiative.readiness === 'Blocked');
-	const blockedCount = blockedInitiatives.length;
+	const blockedCount = initiatives.filter((initiative) => initiative.readiness === 'Blocked').length;
 	const readyForApprovalCount = initiatives.filter(
 		(initiative) => initiative.lifecycleState === 'Ready for Approval'
 	).length;
@@ -36,31 +26,18 @@
 		count: initiatives.filter((initiative) => initiative.lifecycleState === state).length
 	}));
 
-	type DependencyGroup = {
-		key: string;
-		label: string;
-		affected: { name: string; gateOwner: string | null }[];
-	};
-
-	const unresolvedDependencies: DependencyGroup[] = [];
-	for (const initiative of initiatives) {
-		if (!isRiskReviewOrLater(initiative.lifecycleState)) continue;
-		for (const gate of requiredOpenGates(initiative)) {
-			let group = unresolvedDependencies.find((item) => item.key === gate.key);
-			if (!group) {
-				group = { key: gate.key, label: gate.label, affected: [] };
-				unresolvedDependencies.push(group);
-			}
-			group.affected.push({ name: initiative.name, gateOwner: gate.owner });
-		}
-	}
-
-	const ownerActions = blockedInitiatives.map((initiative) => ({
-		id: initiative.id,
-		name: initiative.name,
-		owner: ownerLabel(initiative.owner),
-		openLabels: requiredOpenGates(initiative).map((gate) => gate.label)
-	}));
+	const needsAttention = initiatives.flatMap((initiative) => {
+		if (isPreRiskReview(initiative.lifecycleState)) return [];
+		return applicableRequiredOpenGates(initiative.gates).map((gate) => ({
+			initiativeId: initiative.id,
+			initiativeName: initiative.name,
+			initiativeOwner: ownerLabel(initiative.owner),
+			stage: initiative.lifecycleState,
+			gateKey: gate.key,
+			gateLabel: gate.label,
+			gateOwner: ownerLabel(gate.owner)
+		}));
+	});
 
 	const launchSummary = `Of ${totalCount} recorded initiatives, ${readyForApprovalCount} ${readyForApprovalCount === 1 ? 'is' : 'are'} Ready for Approval, ${approvedForLaunchCount} ${approvedForLaunchCount === 1 ? 'is' : 'are'} Approved for Launch, ${inPilotCount} ${inPilotCount === 1 ? 'is' : 'are'} In Pilot, and ${blockedCount} ${blockedCount === 1 ? 'is' : 'are'} currently Blocked.`;
 
@@ -125,76 +102,42 @@
 		</ul>
 	</section>
 
-	<section class="panel" aria-label="Blocked initiatives">
-		<h2>Blocked initiatives</h2>
-		{#if blockedInitiatives.length === 0}
-			<p>No initiatives currently have readiness Blocked.</p>
-		{:else}
-			<ul data-blocked-initiatives>
-				{#each blockedInitiatives as initiative (initiative.id)}
-					<li>
-						<p>
-							<a href="/initiatives/{initiative.id}">{initiative.name}</a>
-						</p>
-						<p>{initiative.lifecycleState} · Owner: {ownerLabel(initiative.owner)}</p>
-						<p>Required Open gates:</p>
-						<ul>
-							{#each requiredOpenGates(initiative) as gate (gate.key)}
-								<li>{gate.label}</li>
-							{/each}
-						</ul>
-					</li>
-				{/each}
-			</ul>
-		{/if}
-	</section>
-
-	<section class="panel" aria-label="Key unresolved dependencies">
-		<h2>Key unresolved dependencies</h2>
+	<section class="panel" aria-label="Needs attention">
+		<h2>Needs attention</h2>
 		<p class="section-note">
-			Required Open gates on initiatives at Risk Review or later. Open gates on Draft or Intake
-			Review are not leadership-level blockers.
+			Required Open gates at Risk Review or later. Open gates during Draft or Intake Review are not
+			listed here.
 		</p>
-		{#if unresolvedDependencies.length === 0}
-			<p>No required Open gates at Risk Review or later.</p>
+		{#if needsAttention.length === 0}
+			<p>No required Open gates currently prevent progression.</p>
 		{:else}
-			<ul data-unresolved-dependencies>
-				{#each unresolvedDependencies as group (group.key)}
-					<li>
-						<p>{group.label} — {group.affected.length} {group.affected.length === 1 ? 'initiative' : 'initiatives'}</p>
-						<ul>
-							{#each group.affected as item, index (`${group.key}-${index}`)}
-								<li>
-									{item.name}
-									{#if item.gateOwner}
-										· Gate owner: {item.gateOwner}
-									{/if}
-								</li>
-							{/each}
-						</ul>
-					</li>
-				{/each}
-			</ul>
+			<div class="table-scroll">
+				<table data-needs-attention>
+					<thead>
+						<tr>
+							<th scope="col">Initiative</th>
+							<th scope="col">Initiative owner</th>
+							<th scope="col">Stage</th>
+							<th scope="col">Open gate</th>
+							<th scope="col">Gate owner</th>
+						</tr>
+					</thead>
+					<tbody>
+						{#each needsAttention as row (`${row.initiativeId}-${row.gateKey}`)}
+							<tr data-attention-initiative={row.initiativeId} data-attention-gate={row.gateKey}>
+								<th scope="row">
+									<a href="/initiatives/{row.initiativeId}">{row.initiativeName}</a>
+								</th>
+								<td>{row.initiativeOwner}</td>
+								<td>{row.stage}</td>
+								<td>{row.gateLabel}</td>
+								<td>{row.gateOwner}</td>
+							</tr>
+						{/each}
+					</tbody>
+				</table>
+			</div>
 		{/if}
-	</section>
-
-	<section class="panel" aria-label="Owner / action required">
-		<h2>Owner / action required</h2>
-		{#if ownerActions.length === 0}
-			<p>No blocked initiatives currently require owner attention on Open gates.</p>
-		{:else}
-			<ul data-owner-actions>
-				{#each ownerActions as action (action.id)}
-					<li>
-						{action.name} ({action.owner}). Owner attention required on: {action.openLabels.join(', ')}.
-					</li>
-				{/each}
-			</ul>
-		{/if}
-	</section>
-
-	<section class="panel" aria-label="Launch / readiness summary">
-		<h2>Launch / readiness summary</h2>
 		<p data-launch-summary>{launchSummary}</p>
 	</section>
 
@@ -278,6 +221,40 @@
 		margin: 0 0 0.75rem;
 		color: #4b5563;
 		font-size: 0.9rem;
+	}
+
+	.table-scroll {
+		min-width: 0;
+		overflow-x: auto;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	th,
+	td {
+		text-align: left;
+		vertical-align: top;
+		padding: 0.65rem 0.7rem;
+		border-top: 1px solid #e6e3db;
+		font-size: 0.95rem;
+	}
+
+	thead th {
+		background: #eceae4;
+		border-top: 0;
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		color: #4b5563;
+	}
+
+	[data-launch-summary] {
+		margin: 0.85rem 0 0;
+		color: #4b5563;
+		font-size: 0.95rem;
 	}
 
 	.summary {
