@@ -80,9 +80,9 @@ The work should demonstrate competency, judgment, structure, and attention to de
 
 # Current Authorized Step
 
-PAUSED — `workbench-shell` preview validated structurally. One initiative-tree disclosure UX correction remains before merge consideration.
+ACCEPTED — `workbench-shell` at `a609247` is the approved production candidate.
 
-Do not implement that correction in this recording step. Do not begin Phase C. Do not add new features. Do not merge to `main` yet. Do not modify the production branch.
+No Phase C. No additional feature work authorized. Do not alter the accepted application during merge preparation.
 
 # Completed and Validated Steps
 
@@ -376,85 +376,94 @@ Production / `main` / `origin/main`:
 - Branch: `main`
 - Remote: `origin/main`
 
-`workbench-shell` is a development branch ahead of `main`. It is structurally preview-validated on the branch. It has not been merged. Production has not been replaced by `workbench-shell`.
+`workbench-shell` at `a609247` is the accepted production candidate. It has not been merged. Production has not been replaced.
 
 # Current Validated Application State
 
 The complete five-screen read-only product shape remains implemented.
 
-**Production (`main` / `origin/main` at `c1ad370`):** progressive process board on the then-current root/guide arrangement as of that commit. Production has not been replaced by `workbench-shell`.
+**Production (`main` / `origin/main` at `c1ad370`):** not yet replaced by `workbench-shell`.
 
-**`workbench-shell` branch (preview-validated structurally):**
+**Accepted `workbench-shell` architecture (`a609247`, visually accepted, not yet merged):**
 
-- Commits on this branch: `9b3c78a` Make portfolio the workbench front door; `d7a4e12` Add persistent portfolio workbench shell; `9a5fa33` Improve portfolio and leadership triage clarity.
-- Portfolio is the front door (`/`).
-- Full educational/orientation material moved to `/guide`.
+- Portfolio is the application front door (`/`).
+- Educational/orientation content moved to `/guide`.
 - Global destinations: Portfolio / Leadership Brief / Guide.
-- Persistent Workbench Shell for Portfolio and initiative routes.
-- Desktop uses initiative hierarchy + workspace.
-- Narrow widths stack hierarchy above workspace.
-- Existing public initiative URLs remain unchanged.
-- URL remains authoritative for selected initiative and selected child workspace.
+- Persistent Workbench Shell on Portfolio and initiative routes.
+- Desktop: initiative hierarchy + workspace.
+- Responsive narrow-width hierarchy above workspace.
+- Existing public initiative URLs preserved.
+- `/initiatives/{id}` remains Program Controls.
 - Initiative child views: Intake / Risk Pre-Check / Program Controls.
-- `/initiatives/{id}` remains Program Controls; no new Overview screen was introduced.
-- Portfolio triage presentation is stage-aware without changing readiness or gate semantics.
-- Leadership Brief unresolved work is consolidated into one Needs attention table.
-- Mobile/body horizontal overflow was corrected by local table scrolling.
-- Domain model, fixtures, intake completeness, readiness semantics, gate statuses, AI/human authority boundaries, and synthetic-data boundaries remain unchanged.
-- No Phase C cleanup was performed.
+- URL remains authoritative for selected initiative, selected child, and workspace content.
+- Initiative-tree disclosure is independent ephemeral UI state.
+- Disclosure buttons expand/collapse without navigation.
+- Multiple initiative branches may remain expanded.
+- Selected initiative may be collapsed without changing workspace.
+- Initiative name navigates/selects the initiative.
+- Full reload initializes the URL-selected initiative expanded; `/` initializes all collapsed.
+- No disclosure persistence was introduced.
+- Portfolio triage presentation is stage-aware without changing domain semantics.
+- Draft / Intake Review Open gates remain recorded but are presented as not currently blocking.
+- Risk Review-or-later applicable Open gates are presented as requiring resolution.
+- Leadership Brief consolidates unresolved actionable work into one Needs attention table.
+- Narrow-width table overflow is contained locally rather than causing body-level overflow.
+
+Domain freeze preserved. The accepted redesign did not change:
+
+- lifecycle states
+- Readiness = `Blocked` | `Clear`
+- gate statuses `Open` | `Satisfied` | `Not Applicable`
+- fixture values
+- stage-aware readiness semantics
+- deterministic intake completeness
+- AI/human authority boundaries
+- synthetic-data/compliance boundaries
 
 Supporting validated foundations (unchanged):
 
 - SvelteKit / TypeScript / Node.js baseline
 - typed domain model
 - five synthetic initiative fixtures
-- deterministic stage-aware readiness (`Blocked` | `Clear`)
-- deterministic intake completeness
-- program-control gate statuses (`Open` | `Satisfied` | `Not Applicable`)
-- human/AI authority boundaries
 - synthetic data only
 - no persistence
 - no authentication
 - no live AI/API integration
 - no workflow mutations
+- No Phase C cleanup was performed
+
+# Accepted branch checkpoints
+
+- `9b3c78a` — Make portfolio the workbench front door
+- `d7a4e12` — Add persistent portfolio workbench shell
+- `9a5fa33` — Improve portfolio and leadership triage clarity
+- `a71f2ae` — Record workbench shell stopping point
+- `a609247` — Decouple initiative selection and disclosure
+
+# Validation / acceptance
+
+- Phase A independently validated.
+- Phase B independently validated.
+- Narrow-width overflow correction validated.
+- Portfolio/Leadership triage clarity validated.
+- Independent tree-disclosure validation passed.
+- `npm run check` passed with 0 errors and 0 warnings at each final implementation gate.
+- `npm run build` passed at each final implementation gate.
+- Vercel branch Preview for `workbench-shell` / `a609247` was visually reviewed by the product owner.
+- Final disclosure behavior performs as intended.
+- Preview accepted.
 
 # Preview finding / unresolved UX issue
 
-Exactly one known UX issue:
-
-Initiative-tree expansion is currently coupled to URL selection.
-
-Current behavior:
-
-- only the URL-selected initiative branch is expanded;
-- selecting another initiative automatically collapses the previous branch;
-- the user cannot independently collapse the selected parent or keep multiple parent branches expanded.
-
-Agreed next correction (not implemented in this recording):
-
-Selection remains URL-derived; expansion becomes ephemeral user-controlled UI state.
-
-Intended behavior:
-
-- initiative name selects/navigates;
-- disclosure/chevron expands or collapses without navigation;
-- multiple initiative branches may remain expanded;
-- selected initiative is expanded by default on initial deep-link load;
-- selected branch may subsequently be collapsed manually;
-- workspace remains determined by the URL;
-- expansion is not persisted;
-- refresh reconstructs with the URL-selected initiative expanded.
-
-This is the only currently authorized candidate correction for the next session. Do not implement it until that session is explicitly authorized.
+None remaining. The prior initiative-tree expansion/selection coupling was corrected at `a609247` and accepted.
 
 # Stopping-Point Rule
 
-PAUSED — `workbench-shell` preview validated structurally. One initiative-tree disclosure UX correction remains before merge consideration.
+ACCEPTED — `workbench-shell` at `a609247` is the approved production candidate.
 
-- Do not begin Phase C.
-- Do not add new features.
-- Do not merge to `main` yet.
-- Do not modify the production branch.
+- No Phase C.
+- No additional feature work authorized.
+- Do not alter the accepted application during merge preparation.
 
 # Blockers
 
@@ -466,9 +475,9 @@ None recorded.
 
 # Next Authorized Step
 
-Not yet authorized to implement.
+Merge accepted `workbench-shell` into `main`, push `main`, verify successful Vercel production deployment at the existing production URL, then record the final production checkpoint.
 
-Next action when authorized: correct tree expansion behavior on `workbench-shell`, validate preview, then decide merge to `main`. No additional feature work is authorized.
+No Phase C. No additional feature work authorized. Do not alter the accepted application during merge preparation.
 
 # Resume From Here
 
@@ -483,13 +492,17 @@ git log -5 --oneline
 
 Expected branch: `workbench-shell`
 
-Expected branch commits include:
+Expected accepted HEAD: `a609247` Decouple initiative selection and disclosure
+
+Accepted branch checkpoints:
 
 - `9b3c78a` Make portfolio the workbench front door
 - `d7a4e12` Add persistent portfolio workbench shell
 - `9a5fa33` Improve portfolio and leadership triage clarity
+- `a71f2ae` Record workbench shell stopping point
+- `a609247` Decouple initiative selection and disclosure
 
-Expected `main` / `origin/main`: `c1ad370` Add validated progressive process board
+Expected `main` / `origin/main` until merge: `c1ad370` Add validated progressive process board
 
 Re-read:
 
@@ -497,6 +510,6 @@ Re-read:
 - `CLAUDE.md`
 - `PRODUCT_SPEC.md`
 
-Do not begin Phase C. Do not add new features. Do not merge to `main` yet. Do not modify the production branch.
+Next authorized action: merge accepted `workbench-shell` into `main`, push `main`, verify successful Vercel production deployment at the existing production URL, then record the final production checkpoint.
 
-The only currently authorized candidate correction for the next session is initiative-tree disclosure: URL-derived selection; ephemeral, non-persisted expansion; chevron toggles without navigation. Do not implement it until that session is explicitly authorized.
+No Phase C. No additional feature work authorized. Do not alter the accepted application during merge preparation.
