@@ -75,14 +75,12 @@ The work should demonstrate competency, judgment, structure, and attention to de
 - On `workbench-shell`, a persistent Workbench Shell applies to Portfolio and initiative routes only (`/`, `/initiatives/{id}`, `/initiatives/{id}/intake`, `/initiatives/{id}/risk-precheck`). `/guide` and `/leadership-brief` do not render the initiative tree.
 - Desktop: initiative hierarchy + workspace. Narrow widths: hierarchy stacked above workspace. Public initiative URLs are unchanged. The SvelteKit URL remains authoritative for selected initiative and selected child workspace.
 - Initiative child views are Intake / Risk Pre-Check / Program Controls. `/initiatives/{id}` remains Program Controls; no Overview screen was introduced.
-- Production / `main` / `origin/main` have not been replaced by `workbench-shell`.
+- Production is the accepted Workbench application on `main` at `cbcddae` (`Merge accepted workbench shell`), deployed at https://ai-program-control-workbench.vercel.app/.
 - No further architecture decisions have been authorized.
 
 # Current Authorized Step
 
-ACCEPTED — `workbench-shell` at `a609247` is the approved production candidate.
-
-No Phase C. No additional feature work authorized. Do not alter the accepted application during merge preparation.
+COMPLETE — accepted Workbench application deployed to production at `cbcddae`.
 
 # Completed and Validated Steps
 
@@ -369,68 +367,61 @@ Step 12 independently validated. Confirmed:
 
 # Last Known-Good Checkpoint
 
-Production / `main` / `origin/main`:
+Production Checkpoint — `cbcddae` Merge accepted workbench shell
 
-- Commit: `c1ad370`
-- Message: `Add validated progressive process board`
 - Branch: `main`
 - Remote: `origin/main`
-
-`workbench-shell` at `a609247` is the accepted production candidate. It has not been merged. Production has not been replaced.
+- Local and remote synchronized.
+- Production accepted.
 
 # Current Validated Application State
 
-The complete five-screen read-only product shape remains implemented.
+Production application at `cbcddae`:
 
-**Production (`main` / `origin/main` at `c1ad370`):** not yet replaced by `workbench-shell`.
-
-**Accepted `workbench-shell` architecture (`a609247`, visually accepted, not yet merged):**
-
-- Portfolio is the application front door (`/`).
-- Educational/orientation content moved to `/guide`.
+- Portfolio-first AI Program Control & Risk Workbench.
+- Portfolio Dashboard is the front door.
 - Global destinations: Portfolio / Leadership Brief / Guide.
-- Persistent Workbench Shell on Portfolio and initiative routes.
-- Desktop: initiative hierarchy + workspace.
-- Responsive narrow-width hierarchy above workspace.
-- Existing public initiative URLs preserved.
+- Persistent initiative hierarchy + workspace on Portfolio/initiative routes.
+- Initiative children: Intake / Risk Pre-Check / Program Controls.
 - `/initiatives/{id}` remains Program Controls.
-- Initiative child views: Intake / Risk Pre-Check / Program Controls.
-- URL remains authoritative for selected initiative, selected child, and workspace content.
-- Initiative-tree disclosure is independent ephemeral UI state.
-- Disclosure buttons expand/collapse without navigation.
-- Multiple initiative branches may remain expanded.
+- URL controls selected initiative/view/workspace.
+- Disclosure controls independently expand/collapse initiative branches.
+- Multiple branches may remain expanded.
 - Selected initiative may be collapsed without changing workspace.
-- Initiative name navigates/selects the initiative.
-- Full reload initializes the URL-selected initiative expanded; `/` initializes all collapsed.
-- No disclosure persistence was introduced.
-- Portfolio triage presentation is stage-aware without changing domain semantics.
-- Draft / Intake Review Open gates remain recorded but are presented as not currently blocking.
-- Risk Review-or-later applicable Open gates are presented as requiring resolution.
-- Leadership Brief consolidates unresolved actionable work into one Needs attention table.
-- Narrow-width table overflow is contained locally rather than causing body-level overflow.
+- Expansion is ephemeral and not persisted.
+- Guide contains the educational/orientation material and Follow the Process demonstration.
+- Portfolio triage presentation distinguishes recorded pre-Risk Open gates from gates currently requiring resolution.
+- Leadership Brief contains consolidated Needs attention actionable-gate presentation.
+- Narrow-width tables use local horizontal scrolling without body-level overflow.
+- Existing deep links and unknown-initiative 404 behavior are preserved.
 
-Domain freeze preserved. The accepted redesign did not change:
+Domain/product boundaries preserved:
 
-- lifecycle states
-- Readiness = `Blocked` | `Clear`
-- gate statuses `Open` | `Satisfied` | `Not Applicable`
-- fixture values
-- stage-aware readiness semantics
-- deterministic intake completeness
-- AI/human authority boundaries
-- synthetic-data/compliance boundaries
+- Lifecycle states unchanged.
+- Readiness = `Blocked` | `Clear` unchanged.
+- Gate statuses `Open` | `Satisfied` | `Not Applicable` unchanged.
+- Fixture values unchanged.
+- Stage-aware readiness semantics unchanged.
+- Deterministic intake completeness unchanged.
+- AI suggestions remain fixture-based/read-only.
+- Consequential decisions remain human-accountable.
+- Synthetic-data/compliance boundaries remain unchanged.
+- No persistence.
+- No authentication.
+- No live AI/API integration.
+- No workflow mutation.
 
-Supporting validated foundations (unchanged):
+Final production state:
 
-- SvelteKit / TypeScript / Node.js baseline
-- typed domain model
-- five synthetic initiative fixtures
-- synthetic data only
-- no persistence
-- no authentication
-- no live AI/API integration
-- no workflow mutations
-- No Phase C cleanup was performed
+- Branch: `main`
+- Local and remote synchronized.
+- Production merge commit: `cbcddae`
+- Commit message: `Merge accepted workbench shell`
+- `origin/main`: `cbcddae`
+- Vercel production deployment successfully completed.
+- Existing permanent production URL remains: https://ai-program-control-workbench.vercel.app/
+- The existing production URL was visually verified by the product owner.
+- Production accepted.
 
 # Accepted branch checkpoints
 
@@ -439,6 +430,7 @@ Supporting validated foundations (unchanged):
 - `9a5fa33` — Improve portfolio and leadership triage clarity
 - `a71f2ae` — Record workbench shell stopping point
 - `a609247` — Decouple initiative selection and disclosure
+- `cbcddae` — Merge accepted workbench shell
 
 # Validation / acceptance
 
@@ -446,24 +438,22 @@ Supporting validated foundations (unchanged):
 - Phase B independently validated.
 - Narrow-width overflow correction validated.
 - Portfolio/Leadership triage clarity validated.
-- Independent tree-disclosure validation passed.
-- `npm run check` passed with 0 errors and 0 warnings at each final implementation gate.
-- `npm run build` passed at each final implementation gate.
-- Vercel branch Preview for `workbench-shell` / `a609247` was visually reviewed by the product owner.
-- Final disclosure behavior performs as intended.
-- Preview accepted.
+- Independent tree-disclosure correction validated.
+- Final branch Preview visually accepted.
+- Accepted branch merged into `main`.
+- Production deployment visually verified and accepted at the permanent production URL.
 
 # Preview finding / unresolved UX issue
 
-None remaining. The prior initiative-tree expansion/selection coupling was corrected at `a609247` and accepted.
+None remaining.
 
 # Stopping-Point Rule
 
-ACCEPTED — `workbench-shell` at `a609247` is the approved production candidate.
+COMPLETE — accepted Workbench application deployed to production at `cbcddae`.
 
-- No Phase C.
-- No additional feature work authorized.
-- Do not alter the accepted application during merge preparation.
+- Phase C was intentionally not performed.
+- Future automation concepts are not part of the implemented proof-of-work.
+- Any future application changes require a new explicitly authorized step.
 
 # Blockers
 
@@ -475,34 +465,28 @@ None recorded.
 
 # Next Authorized Step
 
-Merge accepted `workbench-shell` into `main`, push `main`, verify successful Vercel production deployment at the existing production URL, then record the final production checkpoint.
+None. Application implementation is complete. No additional feature work is authorized.
 
-No Phase C. No additional feature work authorized. Do not alter the accepted application during merge preparation.
+Phase C was intentionally not performed. Future automation concepts are not part of the implemented proof-of-work. Any future application changes require a new explicitly authorized step.
 
 # Resume From Here
 
-Begin on branch `workbench-shell`. Verify:
+Begin on branch `main`. Verify:
 
 ```
 git status --short
 git status -sb
 git branch --show-current
-git log -5 --oneline
+git log -3 --oneline
 ```
 
-Expected branch: `workbench-shell`
+Expected branch: `main`
 
-Expected accepted HEAD: `a609247` Decouple initiative selection and disclosure
+Expected HEAD / `origin/main`: `cbcddae` Merge accepted workbench shell
 
-Accepted branch checkpoints:
+Local and remote synchronized.
 
-- `9b3c78a` Make portfolio the workbench front door
-- `d7a4e12` Add persistent portfolio workbench shell
-- `9a5fa33` Improve portfolio and leadership triage clarity
-- `a71f2ae` Record workbench shell stopping point
-- `a609247` Decouple initiative selection and disclosure
-
-Expected `main` / `origin/main` until merge: `c1ad370` Add validated progressive process board
+Production URL: https://ai-program-control-workbench.vercel.app/
 
 Re-read:
 
@@ -510,6 +494,4 @@ Re-read:
 - `CLAUDE.md`
 - `PRODUCT_SPEC.md`
 
-Next authorized action: merge accepted `workbench-shell` into `main`, push `main`, verify successful Vercel production deployment at the existing production URL, then record the final production checkpoint.
-
-No Phase C. No additional feature work authorized. Do not alter the accepted application during merge preparation.
+Application implementation is complete. No additional feature work is authorized. Phase C was intentionally not performed. Any future application changes require a new explicitly authorized step.
