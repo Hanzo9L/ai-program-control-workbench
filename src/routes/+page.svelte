@@ -2,10 +2,11 @@
 	import WorkbenchShell from '$lib/components/WorkbenchShell.svelte';
 	import { SYNTHETIC_INITIATIVES } from '$lib/domain/fixtures';
 	import type { Initiative } from '$lib/domain/types';
+	import { applicableRequiredOpenGates, isPreRiskReview } from '$lib/domain/validation';
 
 	const initiatives = SYNTHETIC_INITIATIVES;
 
-	function openGates(initiative: Initiative) {
+	function recordedOpenGates(initiative: Initiative) {
 		return initiative.gates.filter((gate) => gate.status === 'Open');
 	}
 
@@ -75,7 +76,10 @@
 				</thead>
 				<tbody>
 					{#each initiatives as initiative (initiative.id)}
-						{@const open = openGates(initiative)}
+						{@const recordedOpen = recordedOpenGates(initiative)}
+						{@const requiringResolution = isPreRiskReview(initiative.lifecycleState)
+							? []
+							: applicableRequiredOpenGates(initiative.gates)}
 						<tr
 							data-initiative-id={initiative.id}
 							class:blocked={initiative.readiness === 'Blocked'}
@@ -95,13 +99,22 @@
 								</span>
 							</td>
 							<td>
-								<span data-open-count={open.length}>{open.length}</span>
-								{#if open.length > 0}
+								{#if isPreRiskReview(initiative.lifecycleState)}
+									<p class="gate-primary" data-currently-blocking="0">0 currently blocking</p>
+									<p class="gate-secondary" data-open-recorded={recordedOpen.length}>
+										{recordedOpen.length} Open recorded · not counted at {initiative.lifecycleState}
+									</p>
+								{:else if requiringResolution.length > 0}
+									<p class="gate-primary" data-requiring-resolution={requiringResolution.length}>
+										{requiringResolution.length} requiring resolution
+									</p>
 									<ul class="gate-list">
-										{#each open as gate (gate.key)}
+										{#each requiringResolution as gate (gate.key)}
 											<li>{gate.label}</li>
 										{/each}
 									</ul>
+								{:else}
+									<p class="gate-primary" data-requiring-resolution="0">0 requiring resolution</p>
 								{/if}
 							</td>
 							<td class="timestamp">{formatLastUpdated(initiative.lastUpdated)}</td>
@@ -234,6 +247,19 @@
 	.readiness-clear {
 		background: #e4ebe8;
 		color: #2f4a43;
+	}
+
+	.gate-primary {
+		margin: 0;
+		font-weight: 600;
+		font-size: 0.9rem;
+	}
+
+	.gate-secondary {
+		margin: 0.3rem 0 0;
+		color: #5c6570;
+		font-size: 0.8rem;
+		font-weight: 400;
 	}
 
 	.gate-list {
